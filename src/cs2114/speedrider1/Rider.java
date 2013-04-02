@@ -19,10 +19,12 @@ public class Rider
 
     /**
      * creates a new rider
+     * @param x position of the rider
+     * @param y position of the rider
      */
-    public Rider()
+    public Rider(float x, float y)
     {
-        super(10, 100, 6);
+        super(x, y, 6);
         this.setFilled(true);
         this.setColor(Color.red);
 

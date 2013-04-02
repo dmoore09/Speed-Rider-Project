@@ -77,7 +77,7 @@ public class SpeedRiderLevel
         this.setGravity(0, 20f);
 
         // create a new rider
-        rider = new Rider();
+        rider = new Rider(10, 100);
         this.add(rider);
         rider.setGravityScale(0);
 
@@ -232,5 +232,7 @@ public class SpeedRiderLevel
             started = true;
         }
     }
+
+
 
 }
