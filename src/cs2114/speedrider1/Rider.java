@@ -17,10 +17,16 @@ public class Rider
     extends OvalShape
 {
 
+    private SpeedRiderLevel lvl = new SpeedRiderLevel();
+
+
     /**
      * creates a new rider
-     * @param x position of the rider
-     * @param y position of the rider
+     *
+     * @param x
+     *            position of the rider
+     * @param y
+     *            position of the rider
      */
     public Rider(float x, float y)
     {
@@ -47,7 +53,7 @@ public class Rider
     {
         // When rider collides with the goal end the level
         this.remove();
-
+        lvl.setUnlocked();
     }
 
 }

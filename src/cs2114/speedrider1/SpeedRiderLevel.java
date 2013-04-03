@@ -29,12 +29,20 @@ public class SpeedRiderLevel
     private float   y1;
     private float   y2;
 
+    private boolean nextLevelUnlocked;
+
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
     private boolean draw;
     private boolean erase;
     private boolean booster;
     private boolean started;
+
+
+    public SpeedRiderLevel()
+    {
+        nextLevelUnlocked = false;
+    }
 
 
     // ~ Public methods ........................................................
@@ -80,9 +88,6 @@ public class SpeedRiderLevel
         rider = new Rider(10, 100);
         this.add(rider);
         rider.setGravityScale(0);
-
-        // This prevent the screen from sleeping
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
 
@@ -157,9 +162,10 @@ public class SpeedRiderLevel
                 getShapes().intersecting(newx1, newy1, newx2, newy2)
                     .withClass(LineShape.class).front();
 
-            //get booster at location
-            SpeedBooster booster1 = getShapes().locatedAt(newx1, newy1)
-                .withClass(SpeedBooster.class).front();
+            // get booster at location
+            SpeedBooster booster1 =
+                getShapes().locatedAt(newx1, newy1)
+                    .withClass(SpeedBooster.class).front();
 
             // make sure an item was found to remove
             if (segment != null)
@@ -167,7 +173,7 @@ public class SpeedRiderLevel
                 segment.remove();
             }
 
-            //make sure booster is present
+            // make sure booster is present
             if (booster1 != null)
             {
                 booster1.remove();
@@ -234,5 +240,15 @@ public class SpeedRiderLevel
     }
 
 
+    public void setUnlocked()
+    {
+        nextLevelUnlocked = true;
+    }
+
+
+    public boolean isUnlocked()
+    {
+        return nextLevelUnlocked;
+    }
 
 }

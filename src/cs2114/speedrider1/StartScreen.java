@@ -1,13 +1,14 @@
 package cs2114.speedrider1;
 
+import android.app.Activity;
 import sofia.app.Screen;
 
 // -------------------------------------------------------------------------
 /**
- *  The Startup Screen of the App
+ * The Startup Screen of the App
  *
- *  @author Daniel
- *  @version Mar 20, 2013
+ * @author Daniel
+ * @version Mar 20, 2013
  */
 public class StartScreen
     extends Screen
@@ -21,11 +22,12 @@ public class StartScreen
         //
     }
 
+
     /**
      * This lets the player start the game
      */
     public void startClicked()
     {
-        this.presentScreen(SpeedRiderLevel.class, null);
+        this.presentScreen(LevelSelectScreen.class);
     }
 }
