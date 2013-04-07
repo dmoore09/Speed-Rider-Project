@@ -4,7 +4,6 @@ import cs2114.speedrider1.DrawableLine;
 import cs2114.speedrider1.Goal;
 import cs2114.speedrider1.Ground;
 import cs2114.speedrider1.Rider;
-import android.view.WindowManager;
 import sofia.graphics.LineShape;
 import sofia.app.ShapeScreen;
 import sofia.graphics.Color;
@@ -29,20 +28,12 @@ public class SpeedRiderLevel
     private float   y1;
     private float   y2;
 
-    private boolean nextLevelUnlocked;
-
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
     private boolean draw;
     private boolean erase;
     private boolean booster;
     private boolean started;
-
-
-    public SpeedRiderLevel()
-    {
-        nextLevelUnlocked = false;
-    }
 
 
     // ~ Public methods ........................................................
@@ -186,6 +177,14 @@ public class SpeedRiderLevel
             SpeedBooster boost = new SpeedBooster(newx1, newy1);
             this.add(boost);
         }
+        //if lvl is over finish level
+        else
+        {
+            if (rider == null)
+            {
+                this.finish();
+            }
+        }
     }
 
 
@@ -237,18 +236,6 @@ public class SpeedRiderLevel
             rider.applyLinearImpulse(30000, 20000);
             started = true;
         }
-    }
-
-
-    public void setUnlocked()
-    {
-        nextLevelUnlocked = true;
-    }
-
-
-    public boolean isUnlocked()
-    {
-        return nextLevelUnlocked;
     }
 
 }

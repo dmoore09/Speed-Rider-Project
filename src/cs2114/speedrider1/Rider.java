@@ -17,7 +17,8 @@ public class Rider
     extends OvalShape
 {
 
-    private SpeedRiderLevel lvl = new SpeedRiderLevel();
+    // ------------------------------------------------------------------------
+
 
 
     /**
@@ -40,6 +41,7 @@ public class Rider
         this.setFriction(2.0f);
         this.setGravityScale(1);
         this.setLinearVelocity(0, 0);
+
     }
 
 
@@ -51,9 +53,10 @@ public class Rider
      */
     public void onCollisionWith(Goal finish)
     {
+
         // When rider collides with the goal end the level
         this.remove();
-        lvl.setUnlocked();
+
     }
 
 }
