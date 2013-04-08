@@ -48,9 +48,10 @@ public class LevelSelectScreen
 
     /**
      * When lvl1 is finished it will unlock level 2
+     * @param finished tells wheter or not level 1 was finished
      */
-    public void speedRiderLevelFinished()
+    public void speedRiderLevelFinished(boolean finished)
     {
-        lvl2 = true;
+        lvl2 = finished;
     }
 }

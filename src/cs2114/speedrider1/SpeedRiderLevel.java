@@ -19,6 +19,7 @@ public class SpeedRiderLevel
     extends ShapeScreen
 {
     private Rider   rider;
+    private Goal    goal;
 
     // keeps track of how many segments are left to draw
     private int     segmentAmount;
@@ -68,9 +69,8 @@ public class SpeedRiderLevel
         this.add(bound4);
 
         // create a goal for the level
-        Goal finish =
-            new Goal(this.getWidth() - 500, this.getHeight() - 50, 30);
-        this.add(finish);
+        goal = new Goal(this.getWidth() - 500, this.getHeight() - 50, 30);
+        this.add(goal);
 
         // set the gravity level for the course
         this.setGravity(0, 20f);
@@ -177,14 +177,14 @@ public class SpeedRiderLevel
             SpeedBooster boost = new SpeedBooster(newx1, newy1);
             this.add(boost);
         }
-        //if lvl is over finish level
-        else
+        if (rider.getRemoved())
         {
-            if (rider == null)
-            {
-                this.finish();
-            }
+
+                boolean x = true;
+                this.finish(x);
+
         }
+
     }
 
 

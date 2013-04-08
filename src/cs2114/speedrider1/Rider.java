@@ -17,6 +17,9 @@ public class Rider
     extends OvalShape
 {
 
+    //boolean to see if the rider is removed
+    private boolean isRemoved;
+
     // ------------------------------------------------------------------------
 
 
@@ -31,7 +34,9 @@ public class Rider
      */
     public Rider(float x, float y)
     {
+
         super(x, y, 6);
+        isRemoved = false;
         this.setFilled(true);
         this.setColor(Color.red);
 
@@ -53,10 +58,20 @@ public class Rider
      */
     public void onCollisionWith(Goal finish)
     {
+        isRemoved = true;
 
         // When rider collides with the goal end the level
         this.remove();
 
+    }
+
+    /**
+     * return value of is removed
+     * @return true if removed, false if not
+     */
+    public boolean getRemoved()
+    {
+        return isRemoved;
     }
 
 }
