@@ -2,22 +2,20 @@ package cs2114.speedrider1;
 
 import sofia.app.Persistent;
 import sofia.app.Screen;
+
 /**
  * // -------------------------------------------------------------------------
-/**
- *  lets player choose what level he would like to play
+ * /** lets player choose what level he would like to play
  *
- *  @author dmoore09
- *  @version Apr 4, 2013
+ * @author dmoore09
+ * @version Apr 4, 2013
  */
 public class LevelSelectScreen
     extends Screen
 {
 
-    @Persistent private boolean lvl2 = false;
-
-
-
+    @Persistent
+    private boolean lvl2 = false;
 
 
     /**
@@ -25,7 +23,7 @@ public class LevelSelectScreen
      */
     public void level1Clicked()
     {
-        this.presentScreen(SpeedRiderLevel.class);
+        this.presentScreen(LevelOneScreen.class);
     }
 
 
@@ -36,7 +34,7 @@ public class LevelSelectScreen
     {
         if (lvl2 == true)
         {
-            this.presentScreen(SpeedRiderLevel.class);
+            this.presentScreen(LevelTwoScreen.class);
         }
         else
         {
@@ -46,12 +44,15 @@ public class LevelSelectScreen
         }
     }
 
+
     /**
      * When lvl1 is finished it will unlock level 2
-     * @param finished tells wheter or not level 1 was finished
+     *
+     * @param unlocked
+     *            tells wheter or not level 1 was finished
      */
-    public void speedRiderLevelFinished(boolean finished)
+    public void levelOneFinished(boolean unlocked)
     {
-        lvl2 = finished;
+        lvl2 = unlocked;
     }
 }

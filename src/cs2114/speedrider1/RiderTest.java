@@ -6,17 +6,17 @@ import student.AndroidTestCase;
 
 /**
  * // -------------------------------------------------------------------------
-/**
- *  test case for rider class
+ * /** test case for rider class
  *
- *  @author Daniel
- *  @version Apr 1, 2013
+ * @author Daniel
+ * @version Apr 1, 2013
  */
 public class RiderTest
-    extends AndroidTestCase<SpeedRiderLevel>
+    extends AndroidTestCase<LevelOneScreen>
 {
-    private Button start;
+    private Button    start;
     private ShapeView shapeView;
+
 
     /**
      * Test cases that extend AndroidTestCase must have a parameterless
@@ -25,12 +25,13 @@ public class RiderTest
      */
     public RiderTest()
     {
-        super(SpeedRiderLevel.class);
+        super(LevelOneScreen.class);
     }
+
 
     /**
      * test the collision for a rider and a goal. The rider should be removed
-     *  from the screen
+     * from the screen
      */
     public void testOnCollision()
     {

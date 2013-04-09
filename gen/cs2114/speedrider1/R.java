@@ -15,23 +15,24 @@ public final class R {
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f070009;
-        public static final int drawing=0x7f070005;
-        public static final int erasing=0x7f070006;
+        public static final int drawing=0x7f070001;
+        public static final int erasing=0x7f070002;
         public static final int help=0x7f07000b;
-        public static final int level1=0x7f070000;
-        public static final int level2=0x7f070001;
-        public static final int level3=0x7f070002;
-        public static final int level4=0x7f070003;
+        public static final int level1=0x7f070005;
+        public static final int level2=0x7f070006;
+        public static final int level3=0x7f070007;
+        public static final int level4=0x7f070008;
         public static final int menu_settings=0x7f07000c;
-        public static final int shapeView=0x7f070004;
-        public static final int speedBooster=0x7f070007;
-        public static final int start=0x7f070008;
+        public static final int shapeView=0x7f070000;
+        public static final int speedBooster=0x7f070003;
+        public static final int start=0x7f070004;
         public static final int textView1=0x7f07000a;
     }
     public static final class layout {
-        public static final int levelselectscreen=0x7f030000;
-        public static final int speedriderlevel=0x7f030001;
-        public static final int startscreen=0x7f030002;
+        public static final int levelonescreen=0x7f030000;
+        public static final int levelselectscreen=0x7f030001;
+        public static final int leveltwoscreen=0x7f030002;
+        public static final int startscreen=0x7f030003;
     }
     public static final class menu {
         public static final int startscreen=0x7f060000;
@@ -45,6 +46,15 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
     
 
@@ -56,6 +66,8 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f050000;
         /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+ Application theme. 
          */
         public static final int AppTheme=0x7f050001;
     }
