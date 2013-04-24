@@ -1,5 +1,8 @@
 package cs2114.speedrider1;
 
+import android.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
 import cs2114.speedrider1.DrawableLine;
 import cs2114.speedrider1.Goal;
 import cs2114.speedrider1.Ground;
@@ -10,10 +13,12 @@ import sofia.graphics.Color;
 
 // -------------------------------------------------------------------------
 /**
- * The main gameplay screen for the Irritated Avians game.
+ * Level One Screen.
  *
- * @author Tony Allevato
- * @version 2013.03.05
+ * @author Chris Conley
+ * @author Dan Moore
+ * @author Harjas Singh
+ * @version 2013.04.24
  */
 public class LevelOneScreen
     extends ShapeScreen
@@ -42,6 +47,33 @@ public class LevelOneScreen
 
     // ----------------------------------------------------------
 
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.draw:
+                this.draw();
+                return true;
+            case R.id.booster:
+                this.speedBoost();
+                return true;
+            case R.id.erase:
+                this.erase();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
     /**
      * Initializes the state of the screen: its background color, the coordinate
      * system, gravity, and the shapes in the field. Automatically defines the
@@ -49,7 +81,7 @@ public class LevelOneScreen
      */
     public void initialize()
     {
-        draw = true;
+        draw = false;
         booster = false;
         segmentAmount = 500;
         started = false;
@@ -70,14 +102,14 @@ public class LevelOneScreen
         this.add(bound4);
 
         // create a goal for the level
-        goal = new Goal(this.getWidth() - 500, this.getHeight() - 50, 30);
+        goal = new Goal(this.getWidth() - 50, this.getHeight() - 50, 30);
         this.add(goal);
 
         // set the gravity level for the course
         this.setGravity(0, 20f);
 
         // create a new rider
-        rider = new Rider(10, 100);
+        rider = new Rider(10, 10);
         this.add(rider);
         rider.setGravityScale(0);
     }
@@ -95,6 +127,15 @@ public class LevelOneScreen
     {
         this.x1 = newx1;
         this.y1 = newy1;
+
+        Rider rider1 =
+            getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
+
+        // make sure a rider was found to start
+        if (rider1 != null)
+        {
+            this.start();
+        }
     }
 
 
@@ -193,7 +234,7 @@ public class LevelOneScreen
      * set draw field to true when draw button is clicked. set all others to
      * false
      */
-    public void drawingClicked()
+    public void draw()
     {
         draw = true;
         booster = false;
@@ -205,7 +246,7 @@ public class LevelOneScreen
      * set erase field to true when erase button is clicked. set all others to
      * false
      */
-    public void erasingClicked()
+    public void erase()
     {
         draw = false;
         booster = false;
@@ -217,7 +258,7 @@ public class LevelOneScreen
      * set booster field to true when booster button is clicked. set all others
      * to false
      */
-    public void speedBoosterClicked()
+    public void speedBoost()
     {
         draw = false;
         booster = true;
@@ -228,7 +269,7 @@ public class LevelOneScreen
     /**
      * This lets the player control when the animation starts
      */
-    public void startClicked()
+    public void start()
     {
         while (!started)
         {

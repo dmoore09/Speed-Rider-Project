@@ -35,7 +35,7 @@ public class Rider
     public Rider(float x, float y)
     {
 
-        super(x, y, 6);
+        super(x, y, 8.5f);
         isRemoved = false;
         this.setFilled(true);
         this.setColor(Color.red);
@@ -43,10 +43,7 @@ public class Rider
         this.setShapeMotion(ShapeMotion.DYNAMIC);
         this.setDensity(2);
         this.setRestitution(0.1f);
-        this.setFriction(2.0f);
-        this.setGravityScale(1);
-        this.setLinearVelocity(0, 0);
-
+        this.setFriction(0.1f);
     }
 
 

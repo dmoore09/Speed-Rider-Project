@@ -25,5 +25,6 @@ public class Goal
         super(x, y, radius);
         this.setFilled(true);
         this.setColor(Color.green);
+        this.setZIndex(10);
     }
 }

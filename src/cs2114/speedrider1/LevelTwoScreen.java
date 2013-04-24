@@ -1,9 +1,20 @@
 package cs2114.speedrider1;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import sofia.graphics.Color;
 import sofia.graphics.LineShape;
 import sofia.app.ShapeScreen;
 
+/**
+ * Level Two Screen.
+ *
+ * @author Chris Conley
+ * @author Dan Moore
+ * @author Harjas Singh
+ * @version 2013.04.24
+ */
 public class LevelTwoScreen
     extends ShapeScreen
     implements LevelInterface
@@ -30,7 +41,32 @@ public class LevelTwoScreen
 
     // ~ Public methods ........................................................
 
-    // ----------------------------------------------------------
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.draw:
+                this.draw();
+                return true;
+            case R.id.booster:
+                this.speedBoost();
+                return true;
+            case R.id.erase:
+                this.erase();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     /**
      * Initializes the state of the screen: its background color, the coordinate
@@ -183,7 +219,7 @@ public class LevelTwoScreen
      * set draw field to true when draw button is clicked. set all others to
      * false
      */
-    public void drawingClicked()
+    public void draw()
     {
         draw = true;
         booster = false;
@@ -195,7 +231,7 @@ public class LevelTwoScreen
      * set erase field to true when erase button is clicked. set all others to
      * false
      */
-    public void erasingClicked()
+    public void erase()
     {
         draw = false;
         booster = false;
@@ -207,7 +243,7 @@ public class LevelTwoScreen
      * set booster field to true when booster button is clicked. set all others
      * to false
      */
-    public void speedBoosterClicked()
+    public void speedBoost()
     {
         draw = false;
         booster = true;

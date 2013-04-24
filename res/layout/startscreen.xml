@@ -3,7 +3,13 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:keepScreenOn="true"
     tools:context=".StartScreen" >
+
+    <sofia.graphics.ShapeView
+        android:id="@+id/shapeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/textView1"
@@ -19,18 +25,16 @@
         android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/start"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:text="Help" />
 
     <Button
-        android:id="@+id/start"
+        android:id="@+id/start1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/help"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="168dp"
-        android:text="Start" />
+        android:layout_above="@+id/help"
+        android:layout_alignParentLeft="true"
+        android:text="Button" />
 
 </RelativeLayout>

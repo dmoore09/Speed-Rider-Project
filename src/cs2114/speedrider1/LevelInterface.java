@@ -54,26 +54,19 @@ public interface LevelInterface
      * set draw field to true when draw button is clicked. set all others to
      * false
      */
-    public void drawingClicked();
+    public void draw();
 
 
     /**
      * set erase field to true when erase button is clicked. set all others to
      * false
      */
-    public void erasingClicked();
+    public void erase();
 
 
     /**
      * set booster field to true when booster button is clicked. set all others
      * to false
      */
-    public void speedBoosterClicked();
-
-
-    /**
-     * This lets the player control when the animation starts
-     */
-    public void startClicked();
-
+    public void speedBoost();
 }

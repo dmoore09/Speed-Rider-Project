@@ -51,8 +51,8 @@ public class LevelSelectScreen
      * @param unlocked
      *            tells wheter or not level 1 was finished
      */
-    public void levelOneFinished(boolean unlocked)
+    public void levelOneScreenFinished(boolean finished)
     {
-        lvl2 = unlocked;
+        lvl2 = finished;
     }
 }
