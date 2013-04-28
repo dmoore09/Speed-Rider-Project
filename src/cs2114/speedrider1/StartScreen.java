@@ -1,6 +1,6 @@
 package cs2114.speedrider1;
 
-import android.app.Activity;
+import android.media.MediaPlayer;
 import sofia.app.ShapeScreen;
 
 // -------------------------------------------------------------------------
@@ -15,10 +15,21 @@ public class StartScreen
 {
 
     /**
+     * This allows music to be played throughout the app. It is static so all
+     * class can access it. It playes the background music.
+     */
+    static MediaPlayer player;
+
+
+    /**
      * initialize the screen
      */
     public void initialize()
     {
+        player = MediaPlayer.create(this, R.raw.intro);
+        player.start();
+        player.setLooping(true);
+
         this.setGravity(0, 9.8f);
 
         Ground bound1 = new Ground(0, 0, this.getWidth(), 0);
@@ -46,8 +57,27 @@ public class StartScreen
     /**
      * This lets the player start the game
      */
-    public void start1Clicked()
+    public void startClicked()
     {
         this.presentScreen(LevelSelectScreen.class);
+    }
+
+
+    /**
+     * Brings up the settings menu.
+     */
+    public void settingsClicked()
+    {
+        this.presentScreen(SettingsScreen.class);
+    }
+
+
+    /**
+     * Method is called then the user presses the back button. Closes app.
+     */
+    public void onBackPressed()
+    {
+        player.stop();
+        this.finish();
     }
 }

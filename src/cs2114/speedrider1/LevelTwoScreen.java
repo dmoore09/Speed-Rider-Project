@@ -121,6 +121,15 @@ public class LevelTwoScreen
     {
         this.x1 = newx1;
         this.y1 = newy1;
+
+        Rider rider1 =
+            getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
+
+        // make sure a rider was found to start
+        if (rider1 != null)
+        {
+            this.start();
+        }
     }
 
 
@@ -254,7 +263,7 @@ public class LevelTwoScreen
     /**
      * This lets the player control when the animation starts
      */
-    public void startClicked()
+    public void start()
     {
         while (!started)
         {
