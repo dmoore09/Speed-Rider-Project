@@ -30,6 +30,11 @@ public class StartScreen
         player.start();
         player.setLooping(true);
 
+        BackgroundPaper back = new BackgroundPaper(0, 0, getWidth(),
+            getHeight());
+        back.setSensor(true);
+        add(back);
+
         this.setGravity(0, 9.8f);
 
         Ground bound1 = new Ground(0, 0, this.getWidth(), 0);
@@ -51,6 +56,8 @@ public class StartScreen
         rider1.setGravityScale(1.0f);
         rider1.setRestitution(1.0f);
         this.add(rider1);
+
+
     }
 
 

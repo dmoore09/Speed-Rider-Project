@@ -80,6 +80,11 @@ public class LevelTwoScreen
         segmentAmount = 500;
         started = false;
 
+        BackgroundPaper back = new BackgroundPaper(0, 0, getWidth(),
+            getHeight());
+        back.setSensor(true);
+        add(back);
+
         // create bounds so the player does not fall off the screen
         Ground bound1 = new Ground(0, 0, this.getWidth(), 0);
         this.add(bound1);
