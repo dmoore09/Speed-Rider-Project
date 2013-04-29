@@ -41,8 +41,8 @@ public class Rider
         this.setColor(Color.red);
 
         this.setShapeMotion(ShapeMotion.DYNAMIC);
-        this.setDensity(2);
-        this.setRestitution(0.1f);
+        this.setDensity(1);
+        this.setRestitution(0.3f);
         this.setFriction(0.1f);
     }
 
