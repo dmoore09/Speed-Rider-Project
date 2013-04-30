@@ -29,7 +29,7 @@ public class DrawableLine
     {
         super(x1, y1, x2, y2);
         this.setFriction(0);
-        this.setStrokeWidth(3.0);
+        this.setStrokeWidth(5.0);
         this.setZIndex(1);
     }
 }

@@ -30,7 +30,7 @@ public interface LevelInterface
      * @param newy2
      *            the second y location
      */
-    public void onTouchUp(float newx2, float newy2);
+    public void onTouchMove(float newX, float newY);
 
 
     /**

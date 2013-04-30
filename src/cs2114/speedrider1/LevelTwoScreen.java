@@ -27,10 +27,7 @@ public class LevelTwoScreen
     private int     segmentAmount;
 
     private float   x1;
-    private float   x2;
     private float   y1;
-    private float   y2;
-
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
     private boolean draw;
@@ -80,8 +77,8 @@ public class LevelTwoScreen
         segmentAmount = 500;
         started = false;
 
-        BackgroundPaper back = new BackgroundPaper(0, 0, getWidth(),
-            getHeight());
+        BackgroundPaper back =
+            new BackgroundPaper(0, 0, getWidth(), getHeight());
         back.setSensor(true);
         add(back);
 
@@ -135,6 +132,19 @@ public class LevelTwoScreen
         {
             this.start();
         }
+        // if booster is true add a speed booster at location
+        else if (booster == true)
+        {
+            SpeedBooster boost = new SpeedBooster(newx1, newy1);
+            this.add(boost);
+        }
+        if (rider.getRemoved())
+        {
+
+            boolean x = true;
+            this.finish(x);
+
+        }
     }
 
 
@@ -143,19 +153,16 @@ public class LevelTwoScreen
      * When touch is released, the x and y coordinates at the end of the line
      * are drawn
      *
-     * @param newx2
+     * @param newX
      *            the second x location
-     * @param newy2
+     * @param newY
      *            the second y location
      */
-    public void onTouchUp(float newx2, float newy2)
+    public void onTouchMove(float newX, float newY)
     {
-        this.x2 = newx2;
-        this.y2 = newy2;
-
-        this.processTouch(x1, y1, x2, y2);
-        segmentAmount = segmentAmount - 1;
-
+        this.processTouch(x1, y1, newX, newY);
+        x1 = newX;
+        y1 = newY;
     }
 
 
@@ -212,20 +219,6 @@ public class LevelTwoScreen
             }
 
         }
-        // if booster is true add a speed booster at location
-        else if (booster == true)
-        {
-            SpeedBooster boost = new SpeedBooster(newx1, newy1);
-            this.add(boost);
-        }
-        if (rider.getRemoved())
-        {
-
-            boolean x = true;
-            this.finish(x);
-
-        }
-
     }
 
 
