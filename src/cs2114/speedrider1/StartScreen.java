@@ -19,6 +19,7 @@ public class StartScreen
      * class can access it. It playes the background music.
      */
     static MediaPlayer player;
+    private Rider rider1;
 
 
     /**
@@ -51,13 +52,18 @@ public class StartScreen
             new Ground(this.getWidth(), 0, this.getWidth(), this.getHeight());
         this.add(bound4);
 
-        Rider rider1 = new Rider(50f, 50f);
+        rider1 = new Rider(50f, 50f);
         rider1.setLinearVelocity(100f, 200f);
         rider1.setGravityScale(1.0f);
         rider1.setRestitution(1.0f);
         this.add(rider1);
 
 
+    }
+
+    public void afterInitialize()
+    {
+        rider1.finishRider();
     }
 
 

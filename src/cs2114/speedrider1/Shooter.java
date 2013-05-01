@@ -44,6 +44,7 @@ public class Shooter
             this.setShapeMotion(ShapeMotion.DYNAMIC);
             this.setDensity(1);
             this.setRestitution(1f);
+            this.setImage("spikeballg");
         }
 
 
