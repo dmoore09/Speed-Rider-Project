@@ -1,7 +1,5 @@
 package cs2114.speedrider1;
 
-import sofia.graphics.Shape;
-import java.util.ArrayList;
 import android.graphics.PointF;
 import sofia.graphics.Anchor;
 import sofia.graphics.DistanceJoint;
@@ -112,6 +110,15 @@ public class Rider
         wBodyJ2.setCanShapesCollide(false);
         wBodyJ2.connect();
 
+        DistanceJoint wBodyJ3 = new DistanceJoint(wheel1, this,
+            Anchor.CENTER, Anchor.BOTTOM_RIGHT);
+        DistanceJoint wBodyJ4 = new DistanceJoint(wheel2, this,
+            Anchor.CENTER, Anchor.BOTTOM_LEFT);
+        wBodyJ3.setCanShapesCollide(false);
+        wBodyJ3.connect();
+        wBodyJ4.setCanShapesCollide(false);
+        wBodyJ4.connect();
+
 //
 //
 //        //animate wheels
@@ -133,6 +140,8 @@ public class Rider
 
         // When rider collides with the goal end the level
         this.remove();
+        wheel1.remove();
+        wheel2.remove();
 
     }
 

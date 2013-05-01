@@ -38,9 +38,7 @@ public class Shooter
          */
         public Bullet(float x, float y)
         {
-            super(x, y, 5);
-            this.setColor(Color.green);
-            setFilled(true);
+            super(x, y, 8);
             this.setShapeMotion(ShapeMotion.DYNAMIC);
             this.setDensity(1);
             this.setRestitution(1f);
