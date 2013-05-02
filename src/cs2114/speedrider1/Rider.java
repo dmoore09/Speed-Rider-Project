@@ -42,11 +42,10 @@ public class Rider
     {
 
         //main body where force is applied
-        super(x - 10, y - 8, x + 10, y + 4);
+        super(x - 10, y - 8, x + 12, y + 9);
 
         isRemoved = false;
-        this.setFilled(true);
-        this.setColor(Color.red);
+
         PointF point = new PointF(x, y - 8);
         this.setPositionAnchor(point);
 
@@ -54,6 +53,8 @@ public class Rider
         this.setDensity(1);
         this.setRestitution(0.3f);
         this.setFriction(0.1f);
+
+        this.setImage("bike");
 
 
 
@@ -119,11 +120,30 @@ public class Rider
         wBodyJ4.setCanShapesCollide(false);
         wBodyJ4.connect();
 
-//
-//
-//        //animate wheels
-//        wheel1.animate(200).repeat().rotation(360);
-//        wheel2.animate(200).repeat().rotation(360);
+        DistanceJoint wBodyJ5 = new DistanceJoint(wheel1, this,
+            Anchor.CENTER, Anchor.BOTTOM_LEFT);
+        DistanceJoint wBodyJ6 = new DistanceJoint(wheel2, this,
+            Anchor.CENTER, Anchor.BOTTOM_RIGHT);
+        wBodyJ5.setCanShapesCollide(false);
+        wBodyJ5.connect();
+        wBodyJ6.setCanShapesCollide(false);
+        wBodyJ6.connect();
+
+        DistanceJoint wBodyJ7 = new DistanceJoint(wheel1, this,
+            Anchor.CENTER, Anchor.TOP);
+        DistanceJoint wBodyJ8 = new DistanceJoint(wheel2, this,
+            Anchor.CENTER, Anchor.TOP);
+        wBodyJ7.setCanShapesCollide(false);
+        wBodyJ7.connect();
+        wBodyJ8.setCanShapesCollide(false);
+        wBodyJ8.connect();
+
+        wheel1.setImage("wheel");
+        wheel2.setImage("wheel");
+
+        //animate wheels
+        wheel1.animate(200).repeat().rotation(360);
+        wheel2.animate(200).repeat().rotation(360);
 
     }
 

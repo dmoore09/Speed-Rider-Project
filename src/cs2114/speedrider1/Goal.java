@@ -27,4 +27,13 @@ public class Goal
         this.setColor(Color.green);
         this.setZIndex(10);
     }
+
+    /**
+     * Place a description of your method here.
+     * @param oval that collides
+     */
+    public void onCollisionWith(OvalShape oval)
+    {
+        oval.remove();
+    }
 }

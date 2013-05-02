@@ -75,6 +75,8 @@ public class LevelOneScreen
             case R.id.erase:
                 this.erase();
                 return true;
+            case R.id.start:
+                this.start();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -143,7 +145,7 @@ public class LevelOneScreen
         // create a new rider
         rider = new Rider(10, 10);
         this.add(rider);
-        rider.setGravityScale(1);
+        rider.setGravityScale(0);
 
         Shooter shoot = new Shooter(getHeight()/2 , getWidth()/2, getHeight()/2 + 10, getWidth()/2 + 10, true);
         add(shoot);
