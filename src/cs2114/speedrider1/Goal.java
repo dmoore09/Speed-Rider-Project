@@ -35,5 +35,6 @@ public class Goal
     public void onCollisionWith(OvalShape oval)
     {
         oval.remove();
+        LevelOneScreen.timer.stop();
     }
 }

@@ -27,27 +27,28 @@ public class LevelOneScreen
     extends ShapeScreen
     implements LevelInterface
 {
-    private Rider   rider;
-    private Goal    goal;
+    private Rider                rider;
+    private Goal                 goal;
+    static StopWatch             timer;
 
     // keeps track of how many segments are left to draw
-    private int     segmentAmount;
+    private int                  segmentAmount;
 
-    private float   x1;
-    private float   x2;
-    private float   y1;
-    private float   y2;
+    private float                x1;
+    private float                x2;
+    private float                y1;
+    private float                y2;
 
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
-    private boolean draw;
-    private boolean erase;
-    private boolean booster;
-    private boolean started;
+    private boolean              draw;
+    private boolean              erase;
+    private boolean              booster;
+    private boolean              started;
 
-    //listener for pinch zoom
+    // listener for pinch zoom
     private ScaleGestureDetector mScaleDetector;
-    private float mScaleFactor = 1.f;
+    private float                mScaleFactor = 1.f;
 
 
     // ~ Public methods ........................................................
@@ -82,8 +83,9 @@ public class LevelOneScreen
         }
     }
 
+
     private class ScaleListener
-    extends ScaleGestureDetector.SimpleOnScaleGestureListener
+        extends ScaleGestureDetector.SimpleOnScaleGestureListener
     {
 
         @Override
@@ -111,12 +113,14 @@ public class LevelOneScreen
         segmentAmount = 500;
         started = false;
 
-        mScaleDetector = new ScaleGestureDetector(this.getBaseContext(),
-            new ScaleListener());
+        timer = new StopWatch();
+
+        mScaleDetector =
+            new ScaleGestureDetector(this.getBaseContext(), new ScaleListener());
         enableScaleGestures();
 
-        BackgroundPaper back = new BackgroundPaper(0, 0, getWidth(),
-            getHeight());
+        BackgroundPaper back =
+            new BackgroundPaper(0, 0, getWidth(), getHeight());
         back.setSensor(true);
         add(back);
 
@@ -147,10 +151,17 @@ public class LevelOneScreen
         this.add(rider);
         rider.setGravityScale(0);
 
-        Shooter shoot = new Shooter(getHeight()/2 , getWidth()/2, getHeight()/2 + 10, getWidth()/2 + 10, true);
+        Shooter shoot =
+            new Shooter(
+                getHeight() / 2,
+                getWidth() / 2,
+                getHeight() / 2 + 10,
+                getWidth() / 2 + 10,
+                true);
         add(shoot);
 
     }
+
 
     /**
      * finish the rider
@@ -160,9 +171,12 @@ public class LevelOneScreen
         rider.finishRider();
     }
 
+
     /**
      * touch down for pinch zoom
-     * @param ev for multi-touch
+     *
+     * @param ev
+     *            for multi-touch
      */
     public void onTouchDown(MotionEvent ev)
     {
@@ -170,10 +184,13 @@ public class LevelOneScreen
 
     }
 
+
     // ----------------------------------------------------------
     /**
      * Place a description of your method here.
-     * @param canvas to be drawn on
+     *
+     * @param canvas
+     *            to be drawn on
      */
     public void onDraw(Canvas canvas)
     {
@@ -204,8 +221,24 @@ public class LevelOneScreen
         if (rider1 != null)
         {
             this.start();
+            timer.start();
+        }
+        // if booster is true add a speed booster at location
+        if (booster == true)
+        {
+            SpeedBooster boost = new SpeedBooster(newx1, newy1);
+            this.add(boost);
+        }
+        if (rider.getRemoved())
+        {
+            this.showAlertDialog("Level 1 Finished!", "Your time was: "
+                + String.valueOf(timer.getElapsedTimeSecs() + " seconds."));
+            boolean x = true;
+            this.finish(x);
+
         }
     }
+
 
     /**
      * When touch is released, the x and y coordinates at the end of the line
@@ -221,27 +254,6 @@ public class LevelOneScreen
         this.processTouch(x1, y1, newX, newY);
         x1 = newX;
         y1 = newY;
-    }
-
-
-    // ----------------------------------------------------------
-    /**
-     * When touch is released, the x and y coordinates at the end of the line
-     * are drawn
-     *
-     * @param newx2
-     *            the second x location
-     * @param newy2
-     *            the second y location
-     */
-    public void onTouchUp(float newx2, float newy2)
-    {
-        this.x2 = newx2;
-        this.y2 = newy2;
-
-        this.processTouch(x1, y1, x2, y2);
-        segmentAmount = segmentAmount - 1;
-
     }
 
 
@@ -296,19 +308,6 @@ public class LevelOneScreen
             {
                 booster1.remove();
             }
-
-        }
-        // if booster is true add a speed booster at location
-        else if (booster == true)
-        {
-            SpeedBooster boost = new SpeedBooster(newx1, newy1);
-            this.add(boost);
-        }
-        if (rider.getRemoved())
-        {
-
-            boolean x = true;
-            this.finish(x);
 
         }
 
