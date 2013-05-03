@@ -10,5 +10,9 @@
     <item
         android:id="@+id/erase"
         android:title="Erase"/>
+    
+    <item
+        android:id="@+id/undo"
+        android:title="Previous Results"/>
 
 </menu>

@@ -78,8 +78,8 @@ public class Rider
         wheel2.setRestitution(0.3f);
         wheel2.setFriction(0.1f);
 
-        wheel1.setGravityScale(1.0f);
-        wheel2.setGravityScale(1.0f);
+        wheel1.setGravityScale(0);
+        wheel2.setGravityScale(0);
 
 
 
@@ -162,7 +162,6 @@ public class Rider
         this.remove();
         wheel1.remove();
         wheel2.remove();
-
     }
 
     /**

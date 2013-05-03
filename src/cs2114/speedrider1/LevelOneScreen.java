@@ -1,5 +1,12 @@
 package cs2114.speedrider1;
 
+import java.nio.charset.Charset;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.FileOutputStream;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.ScaleGestureDetector;
 import android.view.MotionEvent;
@@ -25,20 +32,14 @@ import sofia.graphics.Color;
  */
 public class LevelOneScreen
     extends ShapeScreen
-    implements LevelInterface
+// implements LevelInterface
 {
     private Rider                rider;
     private Goal                 goal;
-    static StopWatch             timer;
-
-    // keeps track of how many segments are left to draw
-    private int                  segmentAmount;
+    private StopWatch            timer;
 
     private float                x1;
-    private float                x2;
     private float                y1;
-    private float                y2;
-
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
     private boolean              draw;
@@ -50,40 +51,10 @@ public class LevelOneScreen
     private ScaleGestureDetector mScaleDetector;
     private float                mScaleFactor = 1.f;
 
+    private String               FILENAME;
+
 
     // ~ Public methods ........................................................
-
-    // ----------------------------------------------------------
-
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-        return true;
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.draw:
-                this.draw();
-                return true;
-            case R.id.booster:
-                this.speedBoost();
-                return true;
-            case R.id.erase:
-                this.erase();
-                return true;
-            case R.id.start:
-                this.start();
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
     private class ScaleListener
         extends ScaleGestureDetector.SimpleOnScaleGestureListener
     {
@@ -110,9 +81,7 @@ public class LevelOneScreen
     {
         draw = false;
         booster = false;
-        segmentAmount = 500;
         started = false;
-
         timer = new StopWatch();
 
         mScaleDetector =
@@ -169,6 +138,7 @@ public class LevelOneScreen
     public void afterInitialize()
     {
         rider.finishRider();
+        FILENAME = "listOfTimes";
     }
 
 
@@ -185,7 +155,6 @@ public class LevelOneScreen
     }
 
 
-    // ----------------------------------------------------------
     /**
      * Place a description of your method here.
      *
@@ -198,6 +167,37 @@ public class LevelOneScreen
 
         canvas.save();
         canvas.scale(mScaleFactor, mScaleFactor);
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.draw:
+                this.draw();
+                return true;
+            case R.id.booster:
+                this.speedBoost();
+                return true;
+            case R.id.erase:
+                this.erase();
+                return true;
+            case R.id.start:
+                this.start();
+            case R.id.undo:
+                this.getScores();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
@@ -214,6 +214,13 @@ public class LevelOneScreen
         this.x1 = newx1;
         this.y1 = newy1;
 
+        // if booster is true add a speed booster at location
+        if (booster == true)
+        {
+            SpeedBooster boost = new SpeedBooster(newx1, newy1);
+            this.add(boost);
+        }
+
         Rider rider1 =
             getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
 
@@ -223,16 +230,24 @@ public class LevelOneScreen
             this.start();
             timer.start();
         }
-        // if booster is true add a speed booster at location
-        if (booster == true)
-        {
-            SpeedBooster boost = new SpeedBooster(newx1, newy1);
-            this.add(boost);
-        }
+
         if (rider.getRemoved())
         {
-            this.showAlertDialog("Level 1 Finished!", "Your time was: "
-                + String.valueOf(timer.getElapsedTimeSecs() + " seconds."));
+            timer.stop();
+            String time =
+                String.valueOf(timer.getElapsedTimeSecs() + " seconds\n");
+            byte[] timeInBytes = time.getBytes();
+            FileOutputStream fos;
+            try
+            {
+                fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+                fos.write(timeInBytes);
+                fos.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
             boolean x = true;
             this.finish(x);
 
@@ -276,13 +291,9 @@ public class LevelOneScreen
         // if draw is true create lines
         if (draw == true)
         {
-            if (segmentAmount != 0)
-            {
-                DrawableLine segment =
-                    new DrawableLine(newx1, newy1, newx2, newy2);
-                segment.setColor(Color.black);
-                this.add(segment);
-            }
+            DrawableLine segment = new DrawableLine(newx1, newy1, newx2, newy2);
+            segment.setColor(Color.black);
+            this.add(segment);
         }
         // if draw is false erase lines
         else if (erase == true)
@@ -308,9 +319,7 @@ public class LevelOneScreen
             {
                 booster1.remove();
             }
-
         }
-
     }
 
 
@@ -359,9 +368,30 @@ public class LevelOneScreen
         {
             // apply a force to get the rider moving
             rider.setGravityScale(1);
-            rider.applyLinearImpulse(30000, 20000);
+            rider.applyLinearImpulse(0, 20000);
             started = true;
         }
     }
 
+
+    public void getScores()
+    {
+        FileInputStream fis;
+        String result = "";
+        try
+        {
+            fis = openFileInput(FILENAME);
+            FileChannel fc = fis.getChannel();
+            MappedByteBuffer bb =
+                fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+            result = Charset.defaultCharset().decode(bb).toString();
+            fis.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        showAlertDialog("Previous Times", result);
+    }
 }
