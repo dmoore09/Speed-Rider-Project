@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -236,12 +237,33 @@ public class LevelOneScreen
             timer.stop();
             String time =
                 String.valueOf(timer.getElapsedTimeSecs() + " seconds\n");
-            byte[] timeInBytes = time.getBytes();
+            byte[] currentTimeInBytes = time.getBytes();
+
+            FileInputStream fis;
+            String result = "";
+            try
+            {
+                fis = openFileInput(FILENAME);
+                FileChannel fc = fis.getChannel();
+                MappedByteBuffer bb =
+                    fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+                result = Charset.defaultCharset().decode(bb).toString();
+                fis.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            byte[] pastTimesInBytes = result.getBytes();
+
             FileOutputStream fos;
+
             try
             {
                 fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-                fos.write(timeInBytes);
+                fos.write(currentTimeInBytes);
+                fos.write(pastTimesInBytes);
                 fos.close();
             }
             catch (IOException e)
