@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import sofia.app.Persistent;
 import sofia.graphics.Shape;
 import java.util.Stack;
 import java.nio.charset.Charset;
@@ -9,9 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.FileOutputStream;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.view.ScaleGestureDetector;
-import android.view.MotionEvent;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,47 +34,30 @@ public class LevelOneScreen
     extends ShapeScreen
 // implements LevelInterface
 {
-    private Rider                rider;
-    private Goal                 goal;
-    private StopWatch            timer;
+    private Rider        rider;
+    private Goal         goal;
+    private StopWatch    timer;
+    private String       FILENAME;
 
-    private float                x1;
-    private float                y1;
+    @Persistent
+    private long         highScore = 999;
+    private long         elapsedTime;
+
+    private float        x1;
+    private float        y1;
+
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
-    private boolean              draw;
-    private boolean              erase;
-    private boolean              booster;
-    private boolean              started;
+    private boolean      draw;
+    private boolean      erase;
+    private boolean      booster;
+    private boolean      started;
 
-    // listener for pinch zoom
-    private ScaleGestureDetector mScaleDetector;
-    private float                mScaleFactor = 1.f;
-
-    private String               FILENAME;
-
-    //stack for undo function
+    // stack for undo function
     private Stack<Shape> undo1;
 
 
     // ~ Public methods ........................................................
-    private class ScaleListener
-        extends ScaleGestureDetector.SimpleOnScaleGestureListener
-    {
-
-        @Override
-        public boolean onScale(ScaleGestureDetector detector)
-        {
-            mScaleFactor = detector.getScaleFactor();
-
-            // Don't let the object get too small or too large.
-            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
-
-            return true;
-        }
-    }
-
-
     /**
      * Initializes the state of the screen: its background color, the coordinate
      * system, gravity, and the shapes in the field. Automatically defines the
@@ -90,10 +71,6 @@ public class LevelOneScreen
         timer = new StopWatch();
 
         undo1 = new Stack<Shape>();
-
-        mScaleDetector =
-            new ScaleGestureDetector(this.getBaseContext(), new ScaleListener());
-        enableScaleGestures();
 
         BackgroundPaper back =
             new BackgroundPaper(0, 0, getWidth(), getHeight());
@@ -149,34 +126,6 @@ public class LevelOneScreen
     }
 
 
-    /**
-     * touch down for pinch zoom
-     *
-     * @param ev
-     *            for multi-touch
-     */
-    public void onTouchDown(MotionEvent ev)
-    {
-        mScaleDetector.onTouchEvent(ev);
-
-    }
-
-
-    /**
-     * Place a description of your method here.
-     *
-     * @param canvas
-     *            to be drawn on
-     */
-    public void onDraw(Canvas canvas)
-    {
-        getShapeView().draw(canvas);
-
-        canvas.save();
-        canvas.scale(mScaleFactor, mScaleFactor);
-    }
-
-
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -198,12 +147,12 @@ public class LevelOneScreen
             case R.id.erase:
                 this.erase();
                 return true;
-            case R.id.start:;
-                this.start();
-            case R.id.scores:;
+            case R.id.scores:
                 this.getScores();
-            case R.id.undo:;
+                return true;
+            case R.id.undo:
                 this.undo();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -235,7 +184,7 @@ public class LevelOneScreen
             getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
 
         // make sure a rider was found to start
-        if (!started)
+        if (rider1 != null)
         {
             this.start();
             timer.start();
@@ -243,42 +192,7 @@ public class LevelOneScreen
 
         if (rider.getRemoved())
         {
-            timer.stop();
-            String time =
-                String.valueOf(timer.getElapsedTimeSecs() + " seconds\n");
-            byte[] currentTimeInBytes = time.getBytes();
-
-            FileInputStream fis;
-            String result = "";
-            try
-            {
-                fis = openFileInput(FILENAME);
-                FileChannel fc = fis.getChannel();
-                MappedByteBuffer bb =
-                    fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-                result = Charset.defaultCharset().decode(bb).toString();
-                fis.close();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-
-            byte[] pastTimesInBytes = result.getBytes();
-
-            FileOutputStream fos;
-
-            try
-            {
-                fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-                fos.write(currentTimeInBytes);
-                fos.write(pastTimesInBytes);
-                fos.close();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            this.updateTime();
             boolean x = true;
             this.finish(x);
 
@@ -405,13 +319,14 @@ public class LevelOneScreen
         }
     }
 
+
     /**
      * erases past 30 lines drawn, or last speed booster
      */
     public void undo()
     {
         Shape lastShape = undo1.peek();
-        //see if the shape is a line or a speed booster
+        // see if the shape is a line or a speed booster
         if (lastShape instanceof DrawableLine)
         {
             if (undo1.size() >= 10)
@@ -420,7 +335,7 @@ public class LevelOneScreen
                 {
                     Shape booster1 = undo1.pop();
 
-                    if(booster1 instanceof SpeedBooster)
+                    if (booster1 instanceof SpeedBooster)
                     {
                         break;
                     }
@@ -438,10 +353,7 @@ public class LevelOneScreen
     }
 
 
-    /**
-     * print out the latest scores for the level
-     */
-    public void getScores()
+    private String readFile()
     {
         FileInputStream fis;
         String result = "";
@@ -458,7 +370,94 @@ public class LevelOneScreen
         {
             e.printStackTrace();
         }
+        return result;
+    }
 
-        showAlertDialog("Previous Times", result);
+
+    /**
+     * Reads files and presents a pop up dialog that shows previous scores
+     */
+    public void getScores()
+    {
+        String result = this.readFile();
+
+        if (highScore == 999)
+            showAlertDialog(
+                "Previous Times - Current High Score: no data",
+                result);
+        else
+        {
+            showAlertDialog(
+                "Previous Times - Current High Score: "
+                    + String.valueOf(highScore) + " seconds",
+                result);
+        }
+    }
+
+
+    /**
+     * Sets the highScore to elapesTime if needed.
+     */
+    private void updateHighScore()
+    {
+        highScore = elapsedTime;
+    }
+
+
+    /**
+     * Reads and writes to the listOfScores file
+     */
+    private void updateTime()
+    {
+        // Stops the StopWatch and stores its data in a byte array
+        timer.stop();
+        elapsedTime = timer.getElapsedTimeSecs();
+        String time = String.valueOf(elapsedTime + " seconds\n");
+        byte[] currentTimeInBytes = time.getBytes();
+
+        // Updates high score after first run
+        if (elapsedTime < highScore)
+        {
+            this.updateHighScore();
+        }
+
+        // Reads the current file and stores its data in a byte array
+        String result = this.readFile();
+        byte[] pastTimesInBytes = result.getBytes();
+
+        // Converts String data to long data and updates highScore if needed
+// String[] dataPart = result.replaceAll("\\D+", " ").split(" ");
+// long[] dataList = new long[dataPart.length];
+// for (String i : dataPart)
+// {
+// i.trim();
+// }
+// for (int i = 0; i < dataPart.length - 1; i++)
+// {
+// String stringData = dataPart[i];
+// long longData = Long.parseLong(stringData);
+// dataList[i] = longData;
+// }
+// for (int i = 0; i < dataList.length - 1; i++)
+// {
+// if (elapsedTime < dataList[i] && dataList[i] < highScore)
+// {
+// this.updateHighScore();
+// }
+// }
+
+        // Writes the current time followed by the past times to the file
+        FileOutputStream fos;
+        try
+        {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(currentTimeInBytes);
+            fos.write(pastTimesInBytes);
+            fos.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
