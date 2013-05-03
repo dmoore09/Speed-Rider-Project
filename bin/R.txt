@@ -12,8 +12,9 @@ int id level1 0x7f080001
 int id level2 0x7f080002
 int id level3 0x7f080003
 int id level4 0x7f080004
-int id menu_settings 0x7f080011
+int id menu_settings 0x7f080012
 int id mute 0x7f080006
+int id scores 0x7f080011
 int id settings 0x7f08000c
 int id shapeView 0x7f080000
 int id start 0x7f08000b

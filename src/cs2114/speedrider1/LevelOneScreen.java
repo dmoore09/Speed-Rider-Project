@@ -1,6 +1,7 @@
 package cs2114.speedrider1;
 
-import java.io.FileNotFoundException;
+import sofia.graphics.Shape;
+import java.util.Stack;
 import java.nio.charset.Charset;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -54,6 +55,9 @@ public class LevelOneScreen
 
     private String               FILENAME;
 
+    //stack for undo function
+    private Stack<Shape> undo1;
+
 
     // ~ Public methods ........................................................
     private class ScaleListener
@@ -84,6 +88,8 @@ public class LevelOneScreen
         booster = false;
         started = false;
         timer = new StopWatch();
+
+        undo1 = new Stack<Shape>();
 
         mScaleDetector =
             new ScaleGestureDetector(this.getBaseContext(), new ScaleListener());
@@ -192,10 +198,12 @@ public class LevelOneScreen
             case R.id.erase:
                 this.erase();
                 return true;
-            case R.id.start:
+            case R.id.start:;
                 this.start();
-            case R.id.undo:
+            case R.id.scores:;
                 this.getScores();
+            case R.id.undo:;
+                this.undo();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -220,13 +228,14 @@ public class LevelOneScreen
         {
             SpeedBooster boost = new SpeedBooster(newx1, newy1);
             this.add(boost);
+            undo1.push(boost);
         }
 
         Rider rider1 =
             getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
 
         // make sure a rider was found to start
-        if (rider1 != null)
+        if (!started)
         {
             this.start();
             timer.start();
@@ -316,6 +325,7 @@ public class LevelOneScreen
             DrawableLine segment = new DrawableLine(newx1, newy1, newx2, newy2);
             segment.setColor(Color.black);
             this.add(segment);
+            undo1.push(segment);
         }
         // if draw is false erase lines
         else if (erase == true)
@@ -395,7 +405,42 @@ public class LevelOneScreen
         }
     }
 
+    /**
+     * erases past 30 lines drawn, or last speed booster
+     */
+    public void undo()
+    {
+        Shape lastShape = undo1.peek();
+        //see if the shape is a line or a speed booster
+        if (lastShape instanceof DrawableLine)
+        {
+            if (undo1.size() >= 10)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Shape booster1 = undo1.pop();
 
+                    if(booster1 instanceof SpeedBooster)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        booster1.remove();
+                    }
+                }
+            }
+        }
+        else
+        {
+            undo1.pop();
+        }
+    }
+
+
+    /**
+     * print out the latest scores for the level
+     */
     public void getScores()
     {
         FileInputStream fis;

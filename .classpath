@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="C:/Users/Chris/Documents/CS 2114 Projects/Sofia-Support/libs/sofia-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Chris/Documents/CS 2114 Projects/Sofia-Support/libs/student.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Sofia-Support"/>
+	<classpathentry kind="lib" path="C:/Users/Daniel/workspace/Sofia-Support/libs/sofia-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Daniel/workspace/Sofia-Support/libs/student.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

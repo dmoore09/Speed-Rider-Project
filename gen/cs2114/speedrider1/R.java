@@ -27,8 +27,9 @@ public final class R {
         public static final int level2=0x7f080002;
         public static final int level3=0x7f080003;
         public static final int level4=0x7f080004;
-        public static final int menu_settings=0x7f080011;
+        public static final int menu_settings=0x7f080012;
         public static final int mute=0x7f080006;
+        public static final int scores=0x7f080011;
         public static final int settings=0x7f08000c;
         public static final int shapeView=0x7f080000;
         public static final int start=0x7f08000b;
@@ -60,6 +61,15 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
     
 
@@ -71,6 +81,8 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+ Application theme. 
          */
         public static final int AppTheme=0x7f060001;
     }

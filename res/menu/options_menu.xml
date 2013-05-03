@@ -13,6 +13,7 @@
     
     <item
         android:id="@+id/undo"
-        android:title="Previous Results"/>
+        android:title="Undo"/>
+    <item android:id="@+id/scores" android:title="Scores"></item>
 
 </menu>
