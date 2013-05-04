@@ -106,11 +106,13 @@ public class Shooter
         if (rightOrLeft)
         {
             bullet.applyLinearImpulse(-xImpulse, yImpulse);
+            setImage("cannon");
         }
         //shoot to the right
         else
         {
             bullet.applyLinearImpulse(xImpulse, yImpulse);
+            setImage("cannonl");
         }
 
     }
