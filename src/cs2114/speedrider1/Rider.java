@@ -50,7 +50,7 @@ public class Rider
         this.setPositionAnchor(point);
 
         this.setShapeMotion(ShapeMotion.DYNAMIC);
-        this.setDensity(1);
+        this.setDensity(.3f);
         this.setRestitution(0.3f);
         this.setFriction(0.1f);
 
@@ -137,6 +137,9 @@ public class Rider
         wBodyJ7.connect();
         wBodyJ8.setCanShapesCollide(false);
         wBodyJ8.connect();
+
+        wheel1.setGravityScale(1f);
+        wheel2.setGravityScale(1f);
 
         wheel1.setImage("wheel");
         wheel2.setImage("wheel");
