@@ -36,7 +36,7 @@
         <activity
             android:name="cs2114.speedrider1.SettingsScreen"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

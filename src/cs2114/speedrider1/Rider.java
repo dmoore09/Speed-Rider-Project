@@ -24,8 +24,8 @@ public class Rider
     private boolean isRemoved;
 
     // ------------------------------------------------------------------------
-    private OvalShape wheel1;
-    private OvalShape wheel2;
+    static OvalShape wheel1;
+    static OvalShape wheel2;
 
 
 
@@ -138,8 +138,8 @@ public class Rider
         wBodyJ8.setCanShapesCollide(false);
         wBodyJ8.connect();
 
-        wheel1.setGravityScale(1f);
-        wheel2.setGravityScale(1f);
+        wheel1.setGravityScale(0);
+        wheel2.setGravityScale(0);
 
         wheel1.setImage("wheel");
         wheel2.setImage("wheel");

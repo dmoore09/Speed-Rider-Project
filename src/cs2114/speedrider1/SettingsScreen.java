@@ -1,5 +1,9 @@
 package cs2114.speedrider1;
 
+import android.content.Context;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import android.widget.Button;
 import android.widget.ToggleButton;
 import sofia.app.Screen;
 
@@ -19,10 +23,11 @@ public class SettingsScreen
     static boolean       isPlaying = true;
 
     private ToggleButton mute;
+    private Button       resetScores;
 
 
     /**
-     * This method turs the music on or off.
+     * This method turns the music on or off.
      */
     public void muteClicked()
     {
@@ -36,6 +41,27 @@ public class SettingsScreen
             isPlaying = true;
             StartScreen.player.start();
         }
+    }
+
+
+    /**
+     * This method rewrites the listOfScores file to an empty file.
+     */
+    public void resetScoresClicked()
+    {
+        FileOutputStream fos;
+        String FILENAME = "listOfTimes";
+        try
+        {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write("".getBytes());
+            fos.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        resetScores.setText("Done");
     }
 
 

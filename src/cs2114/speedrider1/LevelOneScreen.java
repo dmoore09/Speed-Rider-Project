@@ -32,7 +32,7 @@ import sofia.graphics.Color;
  */
 public class LevelOneScreen
     extends ShapeScreen
-// implements LevelInterface
+    implements LevelInterface
 {
     private Rider        rider;
     private Goal         goal;
@@ -314,6 +314,8 @@ public class LevelOneScreen
         {
             // apply a force to get the rider moving
             rider.setGravityScale(1);
+            Rider.wheel1.setGravityScale(1f);
+            Rider.wheel2.setGravityScale(1f);
             rider.applyLinearImpulse(0, 20000);
             started = true;
         }
@@ -381,9 +383,9 @@ public class LevelOneScreen
     {
         String result = this.readFile();
 
-        if (highScore == 999)
+        if (highScore == 999 || result.equals(""))
             showAlertDialog(
-                "Previous Times - Current High Score: no data",
+                "Previous Times - Current High Score: No Data",
                 result);
         else
         {
@@ -415,7 +417,7 @@ public class LevelOneScreen
         String time = String.valueOf(elapsedTime + " seconds\n");
         byte[] currentTimeInBytes = time.getBytes();
 
-        // Updates high score after first run
+        // Updates high score
         if (elapsedTime < highScore)
         {
             this.updateHighScore();
@@ -424,27 +426,6 @@ public class LevelOneScreen
         // Reads the current file and stores its data in a byte array
         String result = this.readFile();
         byte[] pastTimesInBytes = result.getBytes();
-
-        // Converts String data to long data and updates highScore if needed
-// String[] dataPart = result.replaceAll("\\D+", " ").split(" ");
-// long[] dataList = new long[dataPart.length];
-// for (String i : dataPart)
-// {
-// i.trim();
-// }
-// for (int i = 0; i < dataPart.length - 1; i++)
-// {
-// String stringData = dataPart[i];
-// long longData = Long.parseLong(stringData);
-// dataList[i] = longData;
-// }
-// for (int i = 0; i < dataList.length - 1; i++)
-// {
-// if (elapsedTime < dataList[i] && dataList[i] < highScore)
-// {
-// this.updateHighScore();
-// }
-// }
 
         // Writes the current time followed by the past times to the file
         FileOutputStream fos;
