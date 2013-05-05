@@ -16,8 +16,7 @@ import sofia.app.ShapeScreen;
  * @version 2013.04.24
  */
 public class LevelTwoScreen
-    extends ShapeScreen
-    implements LevelInterface
+    extends Level
 {
 
     private Rider   rider;

@@ -31,8 +31,7 @@ import sofia.graphics.Color;
  * @version 2013.04.24
  */
 public class LevelOneScreen
-    extends ShapeScreen
-    implements LevelInterface
+    extends Level
 {
     private Rider        rider;
     private Goal         goal;
@@ -159,32 +158,11 @@ public class LevelOneScreen
      */
     public void onTouchDown(float newx1, float newy1)
     {
-        this.x1 = newx1;
-        this.y1 = newy1;
-
-        // if booster is true add a speed booster at location
-        if (booster == true)
-        {
-            SpeedBooster boost = new SpeedBooster(newx1, newy1);
-            this.add(boost);
-            undo1.push(boost);
-        }
-
-        // make sure a rider was found to start
-        if (!started)
-        {
-            this.start();
-            timer.start();
-        }
-
-        if (rider.getRemoved())
-        {
-            this.updateTime();
-            boolean x = true;
-            this.finish(x);
-
-        }
+        x1 = newx1;
+        y1 = newy1;
+        super.onTouchDown(newx1, newy1, booster, started, rider, undo1, y1, x1, timer);
     }
+
 
 
     /**
@@ -198,11 +176,10 @@ public class LevelOneScreen
      */
     public void onTouchMove(float newX, float newY)
     {
-        this.processTouch(x1, y1, newX, newY);
+        super.onTouchMove(newX, newY, x1, y1, draw, erase, undo1);
         x1 = newX;
         y1 = newY;
     }
-
 
     /**
      * when a user touches screen create line segment or erase a line segment.
@@ -220,39 +197,8 @@ public class LevelOneScreen
      */
     public void processTouch(float newx1, float newy1, float newx2, float newy2)
     {
-        // if draw is true create lines
-        if (draw == true)
-        {
-            DrawableLine segment = new DrawableLine(newx1, newy1, newx2, newy2);
-            segment.setColor(Color.black);
-            this.add(segment);
-            undo1.push(segment);
-        }
-        // if draw is false erase lines
-        else if (erase == true)
-        {
-            // get line at location
-            LineShape segment =
-                getShapes().intersecting(newx1, newy1, newx2, newy2)
-                    .withClass(LineShape.class).front();
+        super.processTouch(newx1, newy1, newx2, newy2, draw, erase, undo1);
 
-            // get booster at location
-            SpeedBooster booster1 =
-                getShapes().locatedAt(newx1, newy1)
-                    .withClass(SpeedBooster.class).front();
-
-            // make sure an item was found to remove
-            if (segment != null)
-            {
-                segment.remove();
-            }
-
-            // make sure booster is present
-            if (booster1 != null)
-            {
-                booster1.remove();
-            }
-        }
     }
 
 
@@ -297,57 +243,17 @@ public class LevelOneScreen
      */
     public void start()
     {
-        while (!started)
-        {
-            // apply a force to get the rider moving
-            rider.setGravityScale(1);
-            Rider.wheel1.setGravityScale(1f);
-            Rider.wheel2.setGravityScale(1f);
-            rider.applyLinearImpulse(0, 20000);
-            started = true;
-        }
+        super.start(started, rider);
+        started = true;
     }
 
 
     /**
-     * erases past 30 lines drawn, or last speed booster
+     * erases past 10 lines drawn, or last speed booster
      */
     public void undo()
     {
-        Shape lastShape = undo1.peek();
-        // see if the shape is a line or a speed booster
-        if (lastShape instanceof DrawableLine)
-        {
-            //remove last 10 lines
-            if (undo1.size() >= 10)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    Shape booster1 = undo1.pop();
-
-                    if (booster1 instanceof SpeedBooster)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        booster1.remove();
-                    }
-                }
-            }
-            //remove the rest of the lines if there are less then 10
-            else if (undo1.size() != 0)
-            {
-                for (int i = 0; i < undo1.size(); i++)
-                {
-                    undo1.pop();
-                }
-            }
-        }
-        else if (undo1.size() != 0)
-        {
-            undo1.pop();
-        }
+        super.undo(undo1);
     }
 
 
