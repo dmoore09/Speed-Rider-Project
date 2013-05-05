@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import android.graphics.PointF;
 import java.util.Set;
 import cs2114.speedrider1.Shooter.Bullet;
 import sofia.graphics.ShapeView;
@@ -37,14 +38,14 @@ public class ShooterTest
      */
     public void testShooterLeft()
     {
-        shoot = new Shooter(150, 150, 160, 160, true);
-        shapeView.add(shoot);
+        Shooter shoot1 = new Shooter(150, 150, 160, 165, true);
+        shapeView.add(shoot1);
 
         touchDown(shapeView, 100, 100);
         touchUp();
 
         Set<Bullet> bullets =
-            shapeView.getShapesInRange(155, 155, 50, Bullet.class);
+            shapeView.getShapesInRange(155, 155, 200, Bullet.class);
         assertFalse(bullets.isEmpty());
 
 
@@ -74,11 +75,16 @@ public class ShooterTest
     public void testBulletColision()
     {
         Rider rider = new Rider(100, 100);
-        shoot = new Shooter(100, 100, 110, 110, false);
-        shapeView.add(shoot);
+        shapeView.add(rider);
+        rider.finishRider();
+//        shoot = new Shooter(100, 100, 110, 110, false);
+//        shapeView.add(shoot);
 
+        touchDown(shapeView, 100, 100);
+        touchUp();
+        PointF vel = rider.getLinearVelocity();
 
-
+        assertTrue(vel.x != 0);
     }
 
 

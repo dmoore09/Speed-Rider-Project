@@ -54,7 +54,7 @@ public class StartScreen
 
         rider1 = new Rider(50f, 50f);
         rider1.setLinearVelocity(100f, 200f);
-        rider1.setGravityScale(1.0f);
+        rider1.setGravityScale(0);
         rider1.setRestitution(1.0f);
         this.add(rider1);
 
@@ -64,6 +64,9 @@ public class StartScreen
     public void afterInitialize()
     {
         rider1.finishRider();
+        rider1.setGravityScale(1);
+        Rider.wheel1.setGravityScale(1f);
+        Rider.wheel2.setGravityScale(1f);
     }
 
 
