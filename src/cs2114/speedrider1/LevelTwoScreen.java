@@ -1,11 +1,18 @@
 package cs2114.speedrider1;
 
+import android.content.Context;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import sofia.app.Persistent;
+import java.util.Stack;
+import sofia.graphics.Shape;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import sofia.graphics.Color;
-import sofia.graphics.LineShape;
-import sofia.app.ShapeScreen;
 
 /**
  * Level Two Screen.
@@ -21,9 +28,12 @@ public class LevelTwoScreen
 
     private Rider   rider;
     private Goal    goal;
+    private StopWatch    timer;
+    private String       FILENAME;
 
-    // keeps track of how many segments are left to draw
-    private int     segmentAmount;
+    @Persistent
+    private long         highScore = 999;
+    private long         elapsedTime;
 
     private float   x1;
     private float   y1;
@@ -33,6 +43,10 @@ public class LevelTwoScreen
     private boolean erase;
     private boolean booster;
     private boolean started;
+
+    // stack for undo function
+    private Stack<Shape> undo1;
+
 
 
     // ~ Public methods ........................................................
@@ -58,6 +72,12 @@ public class LevelTwoScreen
             case R.id.erase:
                 this.erase();
                 return true;
+            case R.id.scores:
+                this.getScores();
+                return true;
+            case R.id.undo:
+                this.undo(undo1);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -73,7 +93,6 @@ public class LevelTwoScreen
     {
         draw = true;
         booster = false;
-        segmentAmount = 500;
         started = false;
 
         BackgroundPaper back =
@@ -109,6 +128,15 @@ public class LevelTwoScreen
         rider.setGravityScale(0);
     }
 
+    /**
+     * finish the rider
+     */
+    public void afterInitialize()
+    {
+        rider.finishRider();
+        FILENAME = "listOfTimes";
+    }
+
 
     /**
      * create a line segment when player touches down
@@ -120,34 +148,13 @@ public class LevelTwoScreen
      */
     public void onTouchDown(float newx1, float newy1)
     {
-        this.x1 = newx1;
-        this.y1 = newy1;
-
-        Rider rider1 =
-            getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
-
-        // make sure a rider was found to start
-        if (rider1 != null)
-        {
-            this.start();
-        }
-        // if booster is true add a speed booster at location
-        else if (booster == true)
-        {
-            SpeedBooster boost = new SpeedBooster(newx1, newy1);
-            this.add(boost);
-        }
-        if (rider.getRemoved())
-        {
-
-            boolean x = true;
-            this.finish(x);
-
-        }
+        x1 = newx1;
+        y1 = newy1;
+        super.onTouchDown(newx1, newy1, booster, started, rider, undo1, y1, x1, timer);
     }
 
 
-    // ----------------------------------------------------------
+
     /**
      * When touch is released, the x and y coordinates at the end of the line
      * are drawn
@@ -159,11 +166,10 @@ public class LevelTwoScreen
      */
     public void onTouchMove(float newX, float newY)
     {
-        this.processTouch(x1, y1, newX, newY);
+        super.onTouchMove(newX, newY, x1, y1, draw, erase, undo1);
         x1 = newX;
         y1 = newY;
     }
-
 
     /**
      * when a user touches screen create line segment or erase a line segment.
@@ -181,44 +187,10 @@ public class LevelTwoScreen
      */
     public void processTouch(float newx1, float newy1, float newx2, float newy2)
     {
-        // if draw is true create lines
-        if (draw == true)
-        {
-            if (segmentAmount != 0)
-            {
-                DrawableLine segment =
-                    new DrawableLine(newx1, newy1, newx2, newy2);
-                segment.setColor(Color.black);
-                this.add(segment);
-            }
-        }
-        // if draw is false erase lines
-        else if (erase == true)
-        {
-            // get line at location
-            LineShape segment =
-                getShapes().intersecting(newx1, newy1, newx2, newy2)
-                    .withClass(LineShape.class).front();
+        super.processTouch(newx1, newy1, newx2, newy2, draw, erase, undo1);
 
-            // get booster at location
-            SpeedBooster booster1 =
-                getShapes().locatedAt(newx1, newy1)
-                    .withClass(SpeedBooster.class).front();
-
-            // make sure an item was found to remove
-            if (segment != null)
-            {
-                segment.remove();
-            }
-
-            // make sure booster is present
-            if (booster1 != null)
-            {
-                booster1.remove();
-            }
-
-        }
     }
+
 
 
     /**
@@ -268,6 +240,95 @@ public class LevelTwoScreen
             rider.setGravityScale(1);
             rider.applyLinearImpulse(30000, 20000);
             started = true;
+        }
+    }
+
+    private String readFile()
+    {
+        FileInputStream fis;
+        String result = "";
+        try
+        {
+            fis = openFileInput(FILENAME);
+            FileChannel fc = fis.getChannel();
+            MappedByteBuffer bb =
+                fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+            result = Charset.defaultCharset().decode(bb).toString();
+            fis.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * Reads files and presents a pop up dialog that shows previous scores
+     */
+    public void getScores()
+    {
+        String result = this.readFile();
+
+        if (highScore == 999 || result.equals(""))
+            showAlertDialog(
+                "Previous Times - Current High Score: No Data",
+                result);
+        else
+        {
+            showAlertDialog(
+                "Previous Times - Current High Score: "
+                    + String.valueOf(highScore) + " seconds",
+                result);
+        }
+    }
+
+
+    /**
+     * Sets the highScore to elapesTime if needed.
+     */
+    private void updateHighScore()
+    {
+        highScore = elapsedTime;
+    }
+
+
+    /**
+     * Reads and writes to the listOfScores file called by superclass method
+     * process touch
+     */
+    @SuppressWarnings("unused")
+    private void updateTime()
+    {
+        // Stops the StopWatch and stores its data in a byte array
+        timer.stop();
+        elapsedTime = timer.getElapsedTimeSecs();
+        String time = String.valueOf(elapsedTime + " seconds\n");
+        byte[] currentTimeInBytes = time.getBytes();
+
+        // Updates high score
+        if (elapsedTime < highScore)
+        {
+            this.updateHighScore();
+        }
+
+        // Reads the current file and stores its data in a byte array
+        String result = this.readFile();
+        byte[] pastTimesInBytes = result.getBytes();
+
+        // Writes the current time followed by the past times to the file
+        FileOutputStream fos;
+        try
+        {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(currentTimeInBytes);
+            fos.write(pastTimesInBytes);
+            fos.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 

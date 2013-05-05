@@ -13,13 +13,10 @@ import android.content.Context;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.MenuInflater;
-import cs2114.speedrider1.DrawableLine;
 import cs2114.speedrider1.Goal;
 import cs2114.speedrider1.Ground;
 import cs2114.speedrider1.Rider;
-import sofia.graphics.LineShape;
-import sofia.app.ShapeScreen;
-import sofia.graphics.Color;
+
 
 // -------------------------------------------------------------------------
 /**
@@ -311,6 +308,7 @@ public class LevelOneScreen
     /**
      * Reads and writes to the listOfScores file
      */
+    @SuppressWarnings("unused")
     private void updateTime()
     {
         // Stops the StopWatch and stores its data in a byte array
