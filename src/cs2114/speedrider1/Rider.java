@@ -24,13 +24,7 @@ public class Rider
     private boolean isRemoved;
 
     // ------------------------------------------------------------------------
-    /**
-     * wheel1 for the rider
-     */
     static OvalShape wheel1;
-    /**
-     * wheel2 for the rider
-     */
     static OvalShape wheel2;
 
 

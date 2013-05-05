@@ -17,7 +17,6 @@ import cs2114.speedrider1.Goal;
 import cs2114.speedrider1.Ground;
 import cs2114.speedrider1.Rider;
 
-
 // -------------------------------------------------------------------------
 /**
  * Level One Screen.
@@ -242,6 +241,7 @@ public class LevelOneScreen
     {
         super.start(started, rider);
         started = true;
+
     }
 
 
@@ -306,7 +306,8 @@ public class LevelOneScreen
 
 
     /**
-     * Reads and writes to the listOfScores file
+     * Reads and writes to the listOfScores file used in superclass method
+     * process touch
      */
     @SuppressWarnings("unused")
     private void updateTime()

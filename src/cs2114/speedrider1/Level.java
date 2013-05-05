@@ -171,7 +171,7 @@ public class Level
      */
     public void start(boolean started, Rider rider)
     {
-        while (!started)
+        if (!started)
         {
             // apply a force to get the rider moving
             rider.setGravityScale(1);
