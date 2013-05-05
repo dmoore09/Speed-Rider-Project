@@ -111,4 +111,43 @@ public class LevelOneScreenTests
             .withClass(Rider.class).front());
     }
 
+    /**
+     * test undo button make sure the lines are removed
+     */
+    public void testUndoLines()
+    {
+        //must change to clicking in the options menu
+        click(drawing);
+        touchDown(shapeView, 100, 100);
+        touchMove(123, 100);
+        touchUp();
+
+        //same here click the undo button 3 times, should cover all cases
+
+        assertNull(shapeView.getShapes().intersecting(200, 150, 200, 50)
+            .withClass(LineShape.class).front());
+
+    }
+
+    /**
+     * test undo button make sure the boosters are removed
+     */
+    public void testUndoBooster()
+    {
+        //must change to clicking in the options menu
+        click(speedBooster);
+        touchDown(shapeView, 100, 100);
+        touchMove(101, 100);
+        touchUp();
+
+        //same here click the undo button
+
+        assertNull(shapeView.getShapes().locatedAt(100, 100)
+            .withClass(SpeedBooster.class).front());
+
+    }
+
+
+
+
 }

@@ -1,7 +1,6 @@
 package cs2114.speedrider1;
 
 import sofia.graphics.ShapeView;
-import android.widget.Button;
 import student.AndroidTestCase;
 
 /**
@@ -14,7 +13,6 @@ import student.AndroidTestCase;
 public class RiderTest
     extends AndroidTestCase<LevelOneScreen>
 {
-    private Button    start;
     private ShapeView shapeView;
 
 
@@ -35,10 +33,11 @@ public class RiderTest
      */
     public void testOnCollision()
     {
-        click(start);
-        Goal goal = new Goal(10, 100, 12);
+        touchDown(shapeView, 100, 100);
+        touchUp();
+        Goal goal = new Goal(10, 10, 12);
         shapeView.add(goal);
-        assertNull(shapeView.getShapes().locatedAt(10, 100)
+        assertNotNull(shapeView.getShapes().locatedAt(10, 10)
             .withClass(Rider.class).front());
     }
 }

@@ -5,7 +5,6 @@ import sofia.graphics.LineShape;
 import sofia.util.Timer;
 import sofia.util.Random;
 import sofia.graphics.ShapeMotion;
-import sofia.graphics.Color;
 import sofia.graphics.OvalShape;
 import sofia.graphics.RectangleShape;
 

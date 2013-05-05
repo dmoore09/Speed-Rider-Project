@@ -328,6 +328,7 @@ public class LevelOneScreen
         // see if the shape is a line or a speed booster
         if (lastShape instanceof DrawableLine)
         {
+            //remove last 10 lines
             if (undo1.size() >= 10)
             {
                 for (int i = 0; i < 10; i++)
@@ -344,8 +345,16 @@ public class LevelOneScreen
                     }
                 }
             }
+            //remove the rest of the lines if there are less then 10
+            else if (undo1.size() != 0)
+            {
+                for (int i = 0; i < undo1.size(); i++)
+                {
+                    undo1.pop();
+                }
+            }
         }
-        else
+        else if (undo1.size() != 0)
         {
             undo1.pop();
         }

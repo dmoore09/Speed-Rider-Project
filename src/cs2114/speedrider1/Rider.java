@@ -180,10 +180,20 @@ public class Rider
      * returns all component shapes that make up the rider
      * @return list of shapes
      */
-    public OvalShape getWheel()
+    public OvalShape getWheel1()
     {
 
         return wheel1;
+    }
+
+    /**
+     * returns all component shapes that make up the rider
+     * @return list of shapes
+     */
+    public OvalShape getWheel2()
+    {
+
+        return wheel2;
     }
 
 }

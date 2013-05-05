@@ -60,7 +60,7 @@ public class SpeedBooster
         //apply a linear impulse in the same direction as the player's linear
         //velocity
         player.
-        applyLinearImpulse(velocity.x * 25, velocity.y * 25);
+        setLinearVelocity(velocity.x * 2000, velocity.y * 2000);
 
         this.remove();
     }
