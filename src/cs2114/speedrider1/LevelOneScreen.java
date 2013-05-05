@@ -180,11 +180,8 @@ public class LevelOneScreen
             undo1.push(boost);
         }
 
-        Rider rider1 =
-            getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
-
         // make sure a rider was found to start
-        if (rider1 != null)
+        if (!started)
         {
             this.start();
             timer.start();

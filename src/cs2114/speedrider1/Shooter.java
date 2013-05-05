@@ -83,8 +83,6 @@ public class Shooter
         boolean direction)
     {
         super(left, top, right, bottom);
-        setFillColor(Color.green);
-        setFilled(true);
         rightOrLeft = direction;
         Timer.callRepeatedly(this, "shoot", 0, 3000);
     }
