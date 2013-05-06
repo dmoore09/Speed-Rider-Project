@@ -35,7 +35,7 @@ public class LevelOneScreen
     private String       FILENAME;
 
     @Persistent
-    private long         highScore = 999;
+    private long         oneHighScore = 999;
     private long         elapsedTime;
 
     private float        x1;
@@ -107,7 +107,7 @@ public class LevelOneScreen
     public void afterInitialize()
     {
         rider.finishRider();
-        FILENAME = "listOfTimes";
+        FILENAME = "levelOneTimes.txt";
     }
 
 
@@ -160,19 +160,30 @@ public class LevelOneScreen
             boolean x = true;
             this.finish(x);
         }
+
+        Rider rider1 =
+            getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
         // make sure a rider was found to start
-        if (!started)
+        if (rider1 != null)
         {
             this.start();
             timer.start();
         }
+
         x1 = newx1;
         y1 = newy1;
-        super.onTouchDown(newx1, newy1, booster, started, rider, undo1,
-            y1, x1, timer);
+        super.onTouchDown(
+            newx1,
+            newy1,
+            booster,
+            started,
+            rider,
+            undo1,
+            y1,
+            x1,
+            timer);
 
     }
-
 
 
     /**
@@ -190,6 +201,7 @@ public class LevelOneScreen
         x1 = newX;
         y1 = newY;
     }
+
 
     /**
      * when a user touches screen create line segment or erase a line segment.
@@ -253,12 +265,12 @@ public class LevelOneScreen
      */
     public void start()
     {
-            // apply a force to get the rider moving
-            rider.setGravityScale(1);
-            Rider.wheel1.setGravityScale(1f);
-            Rider.wheel2.setGravityScale(1f);
-            rider.applyLinearImpulse(0, 20000);
-            started = true;
+        // apply a force to get the rider moving
+        rider.setGravityScale(1);
+        Rider.wheel1.setGravityScale(1f);
+        Rider.wheel2.setGravityScale(1f);
+        rider.applyLinearImpulse(0, 20000);
+        started = true;
     }
 
 
@@ -299,7 +311,7 @@ public class LevelOneScreen
     {
         String result = this.readFile();
 
-        if (highScore == 999 || result.equals(""))
+        if (oneHighScore == 999 || result.equals(""))
             showAlertDialog(
                 "Previous Times - Current High Score: No Data",
                 result);
@@ -307,7 +319,7 @@ public class LevelOneScreen
         {
             showAlertDialog(
                 "Previous Times - Current High Score: "
-                    + String.valueOf(highScore) + " seconds",
+                    + String.valueOf(oneHighScore) + " seconds",
                 result);
         }
     }
@@ -318,7 +330,7 @@ public class LevelOneScreen
      */
     private void updateHighScore()
     {
-        highScore = elapsedTime;
+        oneHighScore = elapsedTime;
     }
 
 
@@ -335,7 +347,7 @@ public class LevelOneScreen
         byte[] currentTimeInBytes = time.getBytes();
 
         // Updates high score
-        if (elapsedTime < highScore)
+        if (elapsedTime < oneHighScore)
         {
             this.updateHighScore();
         }

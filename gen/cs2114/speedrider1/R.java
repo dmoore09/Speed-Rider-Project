@@ -25,30 +25,31 @@ public final class R {
         public static final int draw=0x7f08000f;
         public static final int erase=0x7f080011;
         public static final int help=0x7f08000c;
-        public static final int level1=0x7f080001;
-        public static final int level2=0x7f080002;
-        public static final int level3=0x7f080003;
-        public static final int level4=0x7f080004;
+        public static final int level1=0x7f080002;
+        public static final int level2=0x7f080003;
+        public static final int level3=0x7f080004;
+        public static final int level4=0x7f080005;
         public static final int menu_settings=0x7f080014;
-        public static final int mute=0x7f080006;
+        public static final int mute=0x7f080007;
         public static final int resetScores=0x7f080008;
         public static final int scores=0x7f080013;
         public static final int settings=0x7f08000e;
         public static final int shapeView=0x7f080000;
         public static final int start=0x7f08000d;
-        public static final int textView1=0x7f080007;
+        public static final int textView1=0x7f080001;
         public static final int textView2=0x7f080009;
-        public static final int textView3=0x7f080005;
+        public static final int textView3=0x7f080006;
         public static final int title=0x7f08000b;
         public static final int undo=0x7f080012;
     }
     public static final class layout {
-        public static final int levelonescreen=0x7f030000;
-        public static final int levelselectscreen=0x7f030001;
-        public static final int levelthreescreen=0x7f030002;
-        public static final int leveltwoscreen=0x7f030003;
-        public static final int settingsscreen=0x7f030004;
-        public static final int startscreen=0x7f030005;
+        public static final int helpscreen=0x7f030000;
+        public static final int levelonescreen=0x7f030001;
+        public static final int levelselectscreen=0x7f030002;
+        public static final int levelthreescreen=0x7f030003;
+        public static final int leveltwoscreen=0x7f030004;
+        public static final int settingsscreen=0x7f030005;
+        public static final int startscreen=0x7f030006;
     }
     public static final class menu {
         public static final int options_menu=0x7f070000;

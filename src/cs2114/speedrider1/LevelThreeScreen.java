@@ -16,35 +16,34 @@ import sofia.graphics.Shape;
 
 // -------------------------------------------------------------------------
 /**
- *  level 3, most difficult level
+ * level 3, most difficult level
  *
- *  @author Daniel
- *  @version May 5, 2013
+ * @author Daniel
+ * @version May 5, 2013
  */
 public class LevelThreeScreen
     extends Level
 {
-    private Rider   rider;
-    private Goal    goal;
+    private Rider        rider;
+    private Goal         goal;
     private StopWatch    timer;
     private String       FILENAME;
 
     @Persistent
-    private long         highScore = 999;
+    private long         threeHighScore = 999;
     private long         elapsedTime;
 
-    private float   x1;
-    private float   y1;
+    private float        x1;
+    private float        y1;
     // keeps track of whether or not the player is drawing, erasing, adding
     // a speed booster, or started the animation
-    private boolean draw;
-    private boolean erase;
-    private boolean booster;
-    private boolean started;
+    private boolean      draw;
+    private boolean      erase;
+    private boolean      booster;
+    private boolean      started;
 
     // stack for undo function
     private Stack<Shape> undo1;
-
 
 
     // ~ Public methods ........................................................
@@ -117,26 +116,36 @@ public class LevelThreeScreen
         this.add(bound4);
 
         // create a goal for the level
-        goal = new Goal(this.getWidth() - 30, this.getHeight()/2 + 150, 15);
+        goal = new Goal(this.getWidth() - 30, this.getHeight() / 2 + 150, 15);
         this.add(goal);
 
-        //add spinners
-        Spinner spinner = new Spinner(this.getWidth()/2, this.getHeight()/2,
-            this.getWidth()/2 + 10, this.getHeight()/2 + 50);
+        // add spinners
+        Spinner spinner =
+            new Spinner(
+                this.getWidth() / 2,
+                this.getHeight() / 2,
+                this.getWidth() / 2 + 10,
+                this.getHeight() / 2 + 50);
         this.add(spinner);
         spinner.animate(500).repeat().rotation(360).play();
 
-        //add spinners
-        Spinner spinner2 = new Spinner(this.getWidth()/2,
-            this.getHeight()/2 - 150, this.getWidth()/2 - 10,
-            this.getHeight()/2 - 100);
+        // add spinners
+        Spinner spinner2 =
+            new Spinner(
+                this.getWidth() / 2,
+                this.getHeight() / 2 - 150,
+                this.getWidth() / 2 - 10,
+                this.getHeight() / 2 - 100);
         this.add(spinner2);
         spinner2.animate(500).repeat().rotation(360).play();
 
-        //add spinners
-        Spinner spinner3 = new Spinner(this.getWidth()/2,
-            this.getHeight()/2 + 150, this.getWidth()/2,
-            this.getHeight()/2 + 100);
+        // add spinners
+        Spinner spinner3 =
+            new Spinner(
+                this.getWidth() / 2,
+                this.getHeight() / 2 + 150,
+                this.getWidth() / 2,
+                this.getHeight() / 2 + 100);
         this.add(spinner3);
         spinner3.animate(500).repeat().rotation(360).play();
 
@@ -149,13 +158,14 @@ public class LevelThreeScreen
         rider.setGravityScale(0);
     }
 
+
     /**
      * finish the rider
      */
     public void afterInitialize()
     {
         rider.finishRider();
-        FILENAME = "listOfTimes";
+        FILENAME = "levelThreeTimes.txt";
     }
 
 
@@ -175,17 +185,29 @@ public class LevelThreeScreen
             boolean x = true;
             this.finish(x);
         }
+
+        Rider rider1 =
+            getShapes().locatedAt(newx1, newy1).withClass(Rider.class).front();
         // make sure a rider was found to start
-        if (!started)
+        if (rider1 != null)
         {
             this.start();
             timer.start();
         }
+
         x1 = newx1;
         y1 = newy1;
-        super.onTouchDown(newx1, newy1, booster, started, rider, undo1, y1, x1, timer);
+        super.onTouchDown(
+            newx1,
+            newy1,
+            booster,
+            started,
+            rider,
+            undo1,
+            y1,
+            x1,
+            timer);
     }
-
 
 
     /**
@@ -203,6 +225,7 @@ public class LevelThreeScreen
         x1 = newX;
         y1 = newY;
     }
+
 
     /**
      * when a user touches screen create line segment or erase a line segment.
@@ -223,7 +246,6 @@ public class LevelThreeScreen
         super.processTouch(newx1, newy1, newx2, newy2, draw, erase, undo1);
 
     }
-
 
 
     /**
@@ -267,13 +289,14 @@ public class LevelThreeScreen
      */
     public void start()
     {
-     // apply a force to get the rider moving
+        // apply a force to get the rider moving
         rider.setGravityScale(1);
         Rider.wheel1.setGravityScale(1f);
         Rider.wheel2.setGravityScale(1f);
         rider.applyLinearImpulse(0, 20000);
         started = true;
     }
+
 
     private String readFile()
     {
@@ -303,7 +326,7 @@ public class LevelThreeScreen
     {
         String result = this.readFile();
 
-        if (highScore == 999 || result.equals(""))
+        if (threeHighScore == 999 || result.equals(""))
             showAlertDialog(
                 "Previous Times - Current High Score: No Data",
                 result);
@@ -311,7 +334,7 @@ public class LevelThreeScreen
         {
             showAlertDialog(
                 "Previous Times - Current High Score: "
-                    + String.valueOf(highScore) + " seconds",
+                    + String.valueOf(threeHighScore) + " seconds",
                 result);
         }
     }
@@ -322,7 +345,7 @@ public class LevelThreeScreen
      */
     private void updateHighScore()
     {
-        highScore = elapsedTime;
+        threeHighScore = elapsedTime;
     }
 
 
@@ -339,7 +362,7 @@ public class LevelThreeScreen
         byte[] currentTimeInBytes = time.getBytes();
 
         // Updates high score
-        if (elapsedTime < highScore)
+        if (elapsedTime < threeHighScore)
         {
             this.updateHighScore();
         }

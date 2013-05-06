@@ -50,9 +50,32 @@ public class SettingsScreen
     public void resetScoresClicked()
     {
         FileOutputStream fos;
-        String FILENAME = "listOfTimes";
+
         try
         {
+            String FILENAME = "levelOneTimes.txt";
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write("".getBytes());
+            fos.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            String FILENAME = "levelTwoTimes.txt";
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write("".getBytes());
+            fos.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            String FILENAME = "levelThreeTimes.txt";
             fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             fos.write("".getBytes());
             fos.close();

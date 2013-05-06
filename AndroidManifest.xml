@@ -13,7 +13,6 @@
         android:targetPackage="cs2114.speedrider1" >
     </instrumentation>
 
-    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -21,7 +20,7 @@
         android:theme="@style/AppBaseTheme" >
         <uses-library android:name="android.test.runner" >
         </uses-library>
-        
+
         <activity
             android:name="cs2114.speedrider1.StartScreen"
             android:label="@string/app_name"
@@ -40,6 +39,12 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
+            android:name="cs2114.speedrider1.HelpScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
             android:name="cs2114.speedrider1.LevelOneScreen"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
@@ -47,6 +52,12 @@
         </activity>
         <activity
             android:name="cs2114.speedrider1.LevelTwoScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="cs2114.speedrider1.LevelThreeScreen"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" >

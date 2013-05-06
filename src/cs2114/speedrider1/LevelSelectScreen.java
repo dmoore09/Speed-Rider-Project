@@ -27,7 +27,6 @@ public class LevelSelectScreen
     private boolean lvl5 = false;
 
 
-
     /**
      * starts level 1
      */
@@ -65,7 +64,7 @@ public class LevelSelectScreen
         if (lvl3 == true)
         {
             StartScreen.player.pause();
-            this.presentScreen(LevelTwoScreen.class);
+            this.presentScreen(LevelThreeScreen.class);
         }
         else
         {

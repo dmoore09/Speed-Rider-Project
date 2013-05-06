@@ -19,7 +19,7 @@ public class StartScreen
      * class can access it. It playes the background music.
      */
     static MediaPlayer player;
-    private Rider rider1;
+    private Rider      rider1;
 
 
     /**
@@ -31,8 +31,8 @@ public class StartScreen
         player.start();
         player.setLooping(true);
 
-        BackgroundPaper back = new BackgroundPaper(0, 0, getWidth(),
-            getHeight());
+        BackgroundPaper back =
+            new BackgroundPaper(0, 0, getWidth(), getHeight());
         back.setSensor(true);
         add(back);
 
@@ -58,8 +58,8 @@ public class StartScreen
         rider1.setRestitution(1.0f);
         this.add(rider1);
 
-
     }
+
 
     public void afterInitialize()
     {
@@ -87,6 +87,15 @@ public class StartScreen
     public void settingsClicked()
     {
         this.presentScreen(SettingsScreen.class);
+    }
+
+
+    /**
+     * Brings up the help menu.
+     */
+    public void helpClicked()
+    {
+        this.presentScreen(HelpScreen.class);
     }
 
 
