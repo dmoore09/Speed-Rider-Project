@@ -76,8 +76,6 @@ public class StartScreen
     public void startClicked()
     {
         this.presentScreen(LevelSelectScreen.class);
-        this.finish();
-
     }
 
 

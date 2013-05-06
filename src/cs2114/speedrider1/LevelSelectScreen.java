@@ -23,16 +23,12 @@ public class LevelSelectScreen
     @Persistent
     private boolean lvl4 = false;
 
-    @Persistent
-    private boolean lvl5 = false;
-
 
     /**
      * starts level 1
      */
     public void level1Clicked()
     {
-        StartScreen.player.pause();
         this.presentScreen(LevelOneScreen.class);
     }
 
@@ -44,7 +40,6 @@ public class LevelSelectScreen
     {
         if (lvl2 == true)
         {
-            StartScreen.player.pause();
             this.presentScreen(LevelTwoScreen.class);
         }
         else
@@ -63,7 +58,6 @@ public class LevelSelectScreen
     {
         if (lvl3 == true)
         {
-            StartScreen.player.pause();
             this.presentScreen(LevelThreeScreen.class);
         }
         else
@@ -82,33 +76,7 @@ public class LevelSelectScreen
     {
         if (lvl4 == true)
         {
-            StartScreen.player.pause();
             this.presentScreen(LevelTwoScreen.class);
-        }
-        else
-        {
-            this.showAlertDialog(
-                "Level 4 is locked",
-                "Beat the previous level to unlock this one.");
-        }
-    }
-
-
-    /**
-     * starts level 5 if it is unlocked
-     */
-    public void level5Clicked()
-    {
-        if (lvl5 == true)
-        {
-            StartScreen.player.pause();
-            this.presentScreen(LevelTwoScreen.class);
-        }
-        else
-        {
-            this.showAlertDialog(
-                "Level 5 is locked",
-                "Beat the previous level to unlock this one.");
         }
     }
 
@@ -146,28 +114,5 @@ public class LevelSelectScreen
     public void levelThreeScreenFinished(boolean finished)
     {
         lvl4 = finished;
-    }
-
-
-    /**
-     * When lvl1 is finished it will unlock level 5
-     *
-     * @param finished
-     *            tells wheter or not level 4 was finished
-     */
-    public void levelFourScreenFinished(boolean finished)
-    {
-        lvl5 = finished;
-    }
-
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        if (SettingsScreen.isPlaying == true)
-        {
-            StartScreen.player.start();
-        }
     }
 }

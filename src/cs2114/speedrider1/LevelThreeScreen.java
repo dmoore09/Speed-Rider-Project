@@ -1,5 +1,7 @@
 package cs2114.speedrider1;
 
+import android.widget.TextView;
+import sofia.util.Timer;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +30,7 @@ public class LevelThreeScreen
     private Goal         goal;
     private StopWatch    timer;
     private String       FILENAME;
+    private TextView     elapsedTimeLvl3;
 
     @Persistent
     private long         threeHighScore = 999;
@@ -143,43 +146,11 @@ public class LevelThreeScreen
         Spinner spinner3 =
             new Spinner(
                 this.getWidth() / 2,
-                this.getHeight() / 2 + 200,
-                this.getWidth() / 2 + 10,
-                this.getHeight() / 2 + 150);
+                this.getHeight() / 2 + 150,
+                this.getWidth() / 2,
+                this.getHeight() / 2 + 100);
         this.add(spinner3);
         spinner3.animate(500).repeat().rotation(360).play();
-
-        // add spinners
-        Spinner spinner4 =
-            new Spinner(
-                this.getWidth() / 2 + 200,
-                this.getHeight() / 2 + 50,
-                this.getWidth() / 2 + 190,
-                this.getHeight() / 2 + 150);
-        this.add(spinner4);
-        spinner4.animate(500).repeat().rotation(360).play();
-
-        // add spinners
-        Spinner spinner5 =
-            new Spinner(
-                this.getWidth() / 2 + 200,
-                this.getHeight() / 2 - 50,
-                this.getWidth() / 2 + 190,
-                this.getHeight() / 2 - 150);
-        this.add(spinner5);
-        spinner5.animate(500).repeat().rotation(360).play();
-
-        //add shooters
-        Shooter shoot1 = new Shooter(this.getWidth()/2 - 100,
-            this.getHeight() / 2 - 150, this.getWidth()/2 - 85,
-            this.getHeight() / 2 - 135, true);
-        add(shoot1);
-
-      //add shooters
-        Shooter shoot2 = new Shooter(this.getWidth() - 15,
-            this.getHeight() / 2 - 100, this.getWidth() - 30,
-            this.getHeight() / 2 - 85, true);
-        add(shoot2);
 
         // set the gravity level for the course
         this.setGravity(0, 20f);
@@ -225,6 +196,7 @@ public class LevelThreeScreen
         {
             this.start();
             timer.start();
+            Timer.callRepeatedly(this, "getElapsedTime", 1000, 1000);
         }
 
         x1 = newx1;
@@ -418,4 +390,21 @@ public class LevelThreeScreen
         }
     }
 
+
+    /**
+     * Updates time on screen so user can see the elapsed time.
+     */
+    public void getElapsedTime()
+    {
+        if (timer.getElapsedTimeSecs() == 1)
+        {
+            elapsedTimeLvl3.setText(String.valueOf(timer.getElapsedTimeSecs())
+                + " second");
+        }
+        else
+        {
+            elapsedTimeLvl3.setText(String.valueOf(timer.getElapsedTimeSecs())
+                + " seconds");
+        }
+    }
 }

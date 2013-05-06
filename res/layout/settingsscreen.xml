@@ -25,7 +25,7 @@
         android:text="ToggleButton" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/elaspedTimeLvl1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/mute"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/resetScores"
         android:layout_alignBottom="@+id/resetScores"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/elaspedTimeLvl1"
         android:text="Reset Scores"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

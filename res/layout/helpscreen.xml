@@ -10,13 +10,13 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/elaspedTimeLvl1"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="How to play\n\n\n1) Press Start\n2) Select Level\n3) Press options menu to see available choices.\n4) Click on an item in the menu to select it and begin drawing on the screen.\n5) Touch the Speed Rider to begin the animation and timer.\n6) When the rider disappears press the screen to finish the level.\n\n\nTry to beat your old times!\n\nGOOD LUCK!"
+        android:text="How to play\n\n\n1) Press Start\n2) Select Level\n3) Press options menu to see available choices.\n4) Click on an item in the menu to select it and begin drawing on the screen.\n5) Touch the Speed Rider to begin the animation and timer.\n6) When the rider hits the green circle and disappears press the screen to finish the level.\n\n\nTry to beat your old times!\n\nGOOD LUCK!"
         android:textSize="20sp" />
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package cs2114.speedrider1;
 
+import android.widget.TextView;
+import sofia.util.Timer;
 import sofia.app.Persistent;
 import sofia.graphics.Shape;
 import java.util.Stack;
@@ -33,6 +35,7 @@ public class LevelOneScreen
     private Goal         goal;
     private StopWatch    timer;
     private String       FILENAME;
+    private TextView     elapsedTimeLvl1;
 
     @Persistent
     private long         oneHighScore = 999;
@@ -168,6 +171,7 @@ public class LevelOneScreen
         {
             this.start();
             timer.start();
+            Timer.callRepeatedly(this, "getElapsedTime", 1000, 1000);
         }
 
         x1 = newx1;
@@ -368,6 +372,24 @@ public class LevelOneScreen
         catch (IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Updates time on screen so user can see the elapsed time.
+     */
+    public void getElapsedTime()
+    {
+        if (timer.getElapsedTimeSecs() == 1)
+        {
+            elapsedTimeLvl1.setText(String.valueOf(timer.getElapsedTimeSecs())
+                + " second");
+        }
+        else
+        {
+            elapsedTimeLvl1.setText(String.valueOf(timer.getElapsedTimeSecs())
+                + " seconds");
         }
     }
 }

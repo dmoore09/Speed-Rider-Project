@@ -1,5 +1,7 @@
 package cs2114.speedrider1;
 
+import android.widget.TextView;
+import sofia.util.Timer;
 import android.content.Context;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,6 +32,7 @@ public class LevelTwoScreen
     private Goal         goal;
     private StopWatch    timer;
     private String       FILENAME;
+    private TextView     elapsedTimeLvl2;
 
     @Persistent
     private long         twoHighScore = 999;
@@ -225,6 +228,7 @@ public class LevelTwoScreen
         {
             this.start();
             timer.start();
+            Timer.callRepeatedly(this, "getElapsedTime", 1000, 1000);
         }
 
         x1 = newx1;
@@ -418,4 +422,20 @@ public class LevelTwoScreen
         }
     }
 
+    /**
+     * Updates time on screen so user can see the elapsed time.
+     */
+    public void getElapsedTime()
+    {
+        if (timer.getElapsedTimeSecs() == 1)
+        {
+            elapsedTimeLvl2.setText(String.valueOf(timer.getElapsedTimeSecs())
+                + " second");
+        }
+        else
+        {
+            elapsedTimeLvl2.setText(String.valueOf(timer.getElapsedTimeSecs())
+                + " seconds");
+        }
+    }
 }
