@@ -30,8 +30,6 @@ public class Spinner
     public Spinner(float left, float top, float right, float bottom)
     {
         super(left, top, right, bottom);
-        setFillColor(Color.green);
-        setFilled(true);
         this.setGravityScale(0);
         this.setDensity(10);
         setShapeMotion(ShapeMotion.DYNAMIC);
