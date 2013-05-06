@@ -11,6 +11,8 @@ import sofia.app.ShapeScreen;
  * Class that defines common mehtods for levels
  *
  * @author Daniel Moore
+ * @author Chris Conley
+ * @author Harjas Singh
  * @version 2013.03.05
  */
 public class Level
@@ -35,7 +37,8 @@ public class Level
      *            of touch
      * @param y1
      *            of touch
-     * @param timer times player for score purposes
+     * @param timer
+     *            times player for score purposes
      */
     public void onTouchDown(
         float newx1,
@@ -57,12 +60,12 @@ public class Level
             undo1.push(boost);
         }
 
-//        // make sure a rider was found to start
-//        if (!started)
-//        {
-//            this.start(started, rider);
-//            timer.start();
-//        }
+// // make sure a rider was found to start
+// if (!started)
+// {
+// this.start(started, rider);
+// timer.start();
+// }
 
         if (rider.getRemoved())
         {
@@ -77,15 +80,24 @@ public class Level
     /**
      * When touch is released, the x and y coordinates at the end of the line
      * are drawn
-     * @param newX x coord
-     * @param newY y coord
-     * @param x1 coord field
-     * @param y1 coord field
-     * @param draw true if draw mode is active
-     * @param erase true if erase mode is active
-     * @param undo1 stack to hold objects drawn
+     *
+     * @param newX
+     *            x coord
+     * @param newY
+     *            y coord
+     * @param x1
+     *            coord field
+     * @param y1
+     *            coord field
+     * @param draw
+     *            true if draw mode is active
+     * @param erase
+     *            true if erase mode is active
+     * @param undo1
+     *            stack to hold objects drawn
      */
-    public void onTouchMove(float newX,
+    public void onTouchMove(
+        float newX,
         float newY,
         float x1,
         float y1,
@@ -161,25 +173,12 @@ public class Level
         }
     }
 
-//    /**
-//     * This lets the player control when the animation starts
-//     *
-//     * @param started
-//     * @param rider
-//     */
-//    public void start(boolean started, Rider rider)
-//    {
-//            // apply a force to get the rider moving
-//            rider.setGravityScale(1);
-//            Rider.wheel1.setGravityScale(1f);
-//            Rider.wheel2.setGravityScale(1f);
-//            rider.applyLinearImpulse(0, 20000);
-//    }
-
 
     /**
      * erases past 30 lines drawn, or last speed booster
-     * @param undo1 stack that holds shapes drawn on the screen
+     *
+     * @param undo1
+     *            stack that holds shapes drawn on the screen
      */
     public void undo(Stack<Shape> undo1)
     {
@@ -219,13 +218,12 @@ public class Level
         }
     }
 
+
     /**
      * update the timer
      */
     private void updateTime()
     {
-        //defined in subclasses
+        // defined in subclasses
     }
 }
-
-

@@ -5,20 +5,20 @@ import java.util.Set;
 import cs2114.speedrider1.Shooter.Bullet;
 import sofia.graphics.ShapeView;
 import student.AndroidTestCase;
+
 /**
  * // -------------------------------------------------------------------------
-/**
- *  test shooter methods
+ * /** test shooter methods
  *
- *  @author Daniel
- *  @version May 5, 2013
+ * @author Daniel
+ * @version May 5, 2013
  */
 public class ShooterTest
     extends AndroidTestCase<LevelOneScreen>
 {
 
     private ShapeView shapeView;
-    private Shooter shoot;
+    private Shooter   shoot;
 
 
     /**
@@ -30,8 +30,8 @@ public class ShooterTest
     {
         super(LevelOneScreen.class);
 
-
     }
+
 
     /**
      * Test shooter when shooting left
@@ -48,9 +48,8 @@ public class ShooterTest
             shapeView.getShapesInRange(155, 155, 200, Bullet.class);
         assertFalse(bullets.isEmpty());
 
-
-
     }
+
 
     /**
      * Test shooter when shooting right
@@ -69,6 +68,7 @@ public class ShooterTest
         assertFalse(bullets.isEmpty());
     }
 
+
     /**
      * Make sure a linear impulse is applied
      */
@@ -77,8 +77,8 @@ public class ShooterTest
         Rider rider = new Rider(100, 100);
         shapeView.add(rider);
         rider.finishRider();
-//        shoot = new Shooter(100, 100, 110, 110, false);
-//        shapeView.add(shoot);
+// shoot = new Shooter(100, 100, 110, 110, false);
+// shapeView.add(shoot);
 
         touchDown(shapeView, 100, 100);
         touchUp();
@@ -86,6 +86,5 @@ public class ShooterTest
 
         assertTrue(vel.x != 0);
     }
-
 
 }

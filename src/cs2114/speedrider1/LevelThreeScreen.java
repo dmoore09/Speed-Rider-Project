@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import android.graphics.Typeface;
 import android.widget.TextView;
 import sofia.util.Timer;
 import android.content.Context;
@@ -51,6 +52,13 @@ public class LevelThreeScreen
 
     // ~ Public methods ........................................................
 
+    /**
+     * Options menu
+     *
+     * @param menu
+     *            the menu
+     * @return boolean
+     */
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -59,6 +67,13 @@ public class LevelThreeScreen
     }
 
 
+    /**
+     * Options menu
+     *
+     * @param item
+     *            the menu
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId())
@@ -91,6 +106,11 @@ public class LevelThreeScreen
      */
     public void initialize()
     {
+
+        Typeface typeFace =
+            Typeface.createFromAsset(getAssets(), "fonts/roughage.ttf");
+        elapsedTimeLvl3.setTypeface(typeFace);
+
         draw = true;
         booster = false;
         started = false;
@@ -146,11 +166,51 @@ public class LevelThreeScreen
         Spinner spinner3 =
             new Spinner(
                 this.getWidth() / 2,
-                this.getHeight() / 2 + 150,
-                this.getWidth() / 2,
-                this.getHeight() / 2 + 100);
+                this.getHeight() / 2 + 200,
+                this.getWidth() / 2 + 10,
+                this.getHeight() / 2 + 150);
         this.add(spinner3);
         spinner3.animate(500).repeat().rotation(360).play();
+
+        // add spinners
+        Spinner spinner4 =
+            new Spinner(
+                this.getWidth() / 2 + 200,
+                this.getHeight() / 2 + 175,
+                this.getWidth() / 2 + 190,
+                this.getHeight() / 2 + 75);
+        this.add(spinner4);
+        spinner4.animate(500).repeat().rotation(360).play();
+
+        // add spinners
+        Spinner spinner5 =
+            new Spinner(
+                this.getWidth() / 2 + 200,
+                this.getHeight() / 2 - 130,
+                this.getWidth() / 2 + 190,
+                this.getHeight() / 2 - 20);
+        this.add(spinner5);
+        spinner5.animate(500).repeat().rotation(360).play();
+
+        // add shooters
+        Shooter shoot1 =
+            new Shooter(
+                this.getWidth() / 2 - 50,
+                this.getHeight() / 2 - 125,
+                this.getWidth() / 2 - 65,
+                this.getHeight() / 2 - 110,
+                true);
+        add(shoot1);
+
+        // add shooters
+        Shooter shoot2 =
+            new Shooter(
+                this.getWidth() - 15,
+                this.getHeight() / 2 - 125,
+                this.getWidth() - 30,
+                this.getHeight() / 2 - 110,
+                true);
+        add(shoot2);
 
         // set the gravity level for the course
         this.setGravity(0, 20f);
@@ -302,6 +362,11 @@ public class LevelThreeScreen
     }
 
 
+    /**
+     * Reads the file from disk
+     *
+     * @return the file in a string
+     */
     private String readFile()
     {
         FileInputStream fis;

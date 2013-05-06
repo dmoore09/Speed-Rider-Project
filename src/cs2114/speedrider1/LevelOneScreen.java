@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import android.graphics.Typeface;
 import android.widget.TextView;
 import sofia.util.Timer;
 import sofia.app.Persistent;
@@ -63,6 +64,10 @@ public class LevelOneScreen
      */
     public void initialize()
     {
+        Typeface typeFace =
+            Typeface.createFromAsset(getAssets(), "fonts/roughage.ttf");
+        elapsedTimeLvl1.setTypeface(typeFace);
+
         draw = false;
         booster = false;
         started = false;
@@ -114,6 +119,13 @@ public class LevelOneScreen
     }
 
 
+    /**
+     * Options menu
+     *
+     * @param menu
+     *            the menu
+     * @return boolean
+     */
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -122,6 +134,13 @@ public class LevelOneScreen
     }
 
 
+    /**
+     * Options menu
+     *
+     * @param item
+     *            the menu
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId())
@@ -287,6 +306,11 @@ public class LevelOneScreen
     }
 
 
+    /**
+     * Reads the file from disk
+     *
+     * @return the file in a string
+     */
     private String readFile()
     {
         FileInputStream fis;

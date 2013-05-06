@@ -6,8 +6,9 @@ import sofia.graphics.LineShape;
  * // -------------------------------------------------------------------------
  * /** This class represents the drawn line
  *
- * @author dmoore09
- * @author chrisc93
+ * @author Daniel Moore
+ * @author Chris Conley
+ * @author Harjas Singh
  * @version Mar 13, 2013
  */
 public class DrawableLine

@@ -3,9 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true" >
+    
+    <sofia.graphics.ShapeView
+        android:id="@+id/shapeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/SettingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,13 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/SettingsTitle"
         android:layout_marginTop="17dp"
         android:checked="true"
         android:text="ToggleButton" />
 
     <TextView
-        android:id="@+id/elaspedTimeLvl1"
+        android:id="@+id/music"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/mute"
@@ -45,12 +51,12 @@
         android:text="Clear" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/ResetScores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/resetScores"
         android:layout_alignBottom="@+id/resetScores"
-        android:layout_alignLeft="@+id/elaspedTimeLvl1"
+        android:layout_alignLeft="@+id/music"
         android:text="Reset Scores"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

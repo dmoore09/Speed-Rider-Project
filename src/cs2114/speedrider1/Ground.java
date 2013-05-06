@@ -2,27 +2,32 @@ package cs2114.speedrider1;
 
 import sofia.graphics.LineShape;
 
-//-------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 /**
- * Represents a segment of the boundary of the game field. We just use these
- * so that the bird has something to bounce off of instead of flying off the
- * screen.
+ * Represents the ground.
  *
- * @author  Tony Allevato
+ * @author Daniel Moore
+ * @author Chris Conley
+ * @author Harjas Singh
  * @version 2013.03.05
  */
-public class Ground extends LineShape
+public class Ground
+    extends LineShape
 {
-    //~ Constructors ..........................................................
+    // ~ Constructors ..........................................................
 
     // ----------------------------------------------------------
     /**
      * Initializes a new ground segment with the specified coordinates.
      *
-     * @param left the x-coordinate of the first point
-     * @param top the y-coordinate of the first point
-     * @param right the x-coordinate of the second point
-     * @param bottom the y-coordinate of the second point
+     * @param left
+     *            the x-coordinate of the first point
+     * @param top
+     *            the y-coordinate of the first point
+     * @param right
+     *            the x-coordinate of the second point
+     * @param bottom
+     *            the y-coordinate of the second point
      */
     public Ground(float left, float top, float right, float bottom)
     {

@@ -4,13 +4,13 @@ import cs2114.speedrider1.Rider;
 import sofia.graphics.OvalShape;
 import android.graphics.PointF;
 import sofia.graphics.Color;
+
 /**
  * // -------------------------------------------------------------------------
-/**
- *  a object that gives the rider a massive speed boost
+ * /** a object that gives the rider a massive speed boost
  *
- *  @author dmoore09
- *  @version Mar 12, 2013
+ * @author dmoore09
+ * @version Mar 12, 2013
  */
 public class SpeedBooster
     extends OvalShape
@@ -18,8 +18,11 @@ public class SpeedBooster
 
     /**
      * initialize speed booster
-     * @param x coord of center
-     * @param y coord of center
+     *
+     * @param x
+     *            coord of center
+     * @param y
+     *            coord of center
      */
     public SpeedBooster(float x, float y)
     {
@@ -29,20 +32,21 @@ public class SpeedBooster
         this.setSensor(true);
     }
 
+
     /**
      * When the rider collides with speed booster apply a force to the rider
      *
-     * @param player is the rider that collides with the speed booster
+     * @param player
+     *            is the rider that collides with the speed booster
      */
     public void onCollisionWith(Rider player)
     {
-        //get the linear velocity of the rider
+        // get the linear velocity of the rider
         PointF velocity = player.getLinearVelocity();
 
-        //apply a linear impulse in the same direction as the player's linear
-        //velocity
-        player.
-        setLinearVelocity(velocity.x * 30, velocity.y * 30);
+        // apply a linear impulse in the same direction as the player's linear
+        // velocity
+        player.setLinearVelocity(velocity.x * 30, velocity.y * 30);
 
         this.remove();
     }

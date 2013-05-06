@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import android.graphics.Typeface;
 import android.widget.TextView;
 import sofia.util.Timer;
 import android.content.Context;
@@ -53,6 +54,13 @@ public class LevelTwoScreen
 
     // ~ Public methods ........................................................
 
+    /**
+     * Options menu
+     *
+     * @param menu
+     *            the menu
+     * @return boolean
+     */
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -61,6 +69,13 @@ public class LevelTwoScreen
     }
 
 
+    /**
+     * Options menu
+     *
+     * @param item
+     *            the item
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId())
@@ -93,6 +108,11 @@ public class LevelTwoScreen
      */
     public void initialize()
     {
+
+        Typeface typeFace =
+            Typeface.createFromAsset(getAssets(), "fonts/roughage.ttf");
+        elapsedTimeLvl2.setTypeface(typeFace);
+
         draw = true;
         booster = false;
         started = false;
@@ -334,6 +354,11 @@ public class LevelTwoScreen
     }
 
 
+    /**
+     * Reads the file from disk
+     *
+     * @return the file in a string
+     */
     private String readFile()
     {
         FileInputStream fis;
@@ -421,6 +446,7 @@ public class LevelTwoScreen
             e.printStackTrace();
         }
     }
+
 
     /**
      * Updates time on screen so user can see the elapsed time.

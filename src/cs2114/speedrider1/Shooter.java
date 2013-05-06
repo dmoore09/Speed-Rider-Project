@@ -10,10 +10,10 @@ import sofia.graphics.RectangleShape;
 
 // -------------------------------------------------------------------------
 /**
- *  shoots out objects in a certain direction
+ * shoots out objects in a certain direction
  *
- *  @author dmoore09
- *  @version Apr 29, 2013
+ * @author dmoore09
+ * @version Apr 29, 2013
  */
 public class Shooter
     extends RectangleShape
@@ -21,19 +21,23 @@ public class Shooter
 
     // -------------------------------------------------------------------------
     /**
-     *  Objects that the shooter creates
+     * Objects that the shooter creates
      *
-     *  @author Daniel
-     *  @version Apr 29, 2013
+     * @author Daniel
+     * @version Apr 29, 2013
      */
-    public class Bullet extends OvalShape
+    public class Bullet
+        extends OvalShape
     {
 
         // ----------------------------------------------------------
         /**
          * Create a new Bullet object.
-         * @param x coordinate of center
-         * @param y coordinate of center
+         *
+         * @param x
+         *            coordinate of center
+         * @param y
+         *            coordinate of center
          */
         public Bullet(float x, float y)
         {
@@ -47,16 +51,21 @@ public class Shooter
 
         /**
          * bullets are removed when they hit an object
-         * @param shape any object
+         *
+         * @param shape
+         *            any object
          */
         public void onCollisionWith(LineShape shape)
         {
             remove();
         }
 
+
         /**
          * bullets are removed when they hit an object
-         * @param player object on screen
+         *
+         * @param player
+         *            object on screen
          */
         public void onCollisionWith(Rider player)
         {
@@ -67,18 +76,29 @@ public class Shooter
     }
 
     // ----------------------------------------------------------
-    //field for direction
+    // field for direction
     private boolean rightOrLeft;
+
 
     /**
      * Create a new Shooter object.
-     * @param left corner of rectangle
-     * @param top corner of rectangle
-     * @param right corner of rectangle
-     * @param bottom corner of rectangle
-     * @param direction direction it will shoot, true is left, false is right
+     *
+     * @param left
+     *            corner of rectangle
+     * @param top
+     *            corner of rectangle
+     * @param right
+     *            corner of rectangle
+     * @param bottom
+     *            corner of rectangle
+     * @param direction
+     *            direction it will shoot, true is left, false is right
      */
-    public Shooter(float left, float top, float right, float bottom,
+    public Shooter(
+        float left,
+        float top,
+        float right,
+        float bottom,
         boolean direction)
     {
         super(left, top, right, bottom);
@@ -86,26 +106,27 @@ public class Shooter
         Timer.callRepeatedly(this, "shoot", 0, 3000);
     }
 
+
     /**
      * creates a bullet object at random velocity
      */
     public void shoot()
     {
-        //create bullet
+        // create bullet
         Bullet bullet = new Bullet(getX(), getY());
         this.getShapeField().add(bullet);
 
-        //random generator for impulses
+        // random generator for impulses
         float xImpulse = Random.generator().nextFloat(1000, 100000);
         float yImpulse = Random.generator().nextFloat(1000, 100000);
 
-        //if rigthOrLeft is true shoot to the left
+        // if rigthOrLeft is true shoot to the left
         if (rightOrLeft)
         {
             bullet.applyLinearImpulse(-xImpulse, yImpulse);
             setImage("cannon");
         }
-        //shoot to the right
+        // shoot to the right
         else
         {
             bullet.applyLinearImpulse(xImpulse, yImpulse);
@@ -113,6 +134,5 @@ public class Shooter
         }
 
     }
-
 
 }

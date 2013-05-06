@@ -1,11 +1,13 @@
 package cs2114.speedrider1;
 
+import android.graphics.Typeface;
+import android.widget.TextView;
+import sofia.app.ShapeScreen;
 import android.content.Context;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import android.widget.Button;
 import android.widget.ToggleButton;
-import sofia.app.Screen;
 
 /**
  * This class allows the user to set a few values based on how they want to play
@@ -15,7 +17,7 @@ import sofia.app.Screen;
  * @version Apr 26, 2013
  */
 public class SettingsScreen
-    extends Screen
+    extends ShapeScreen
 {
     /**
      * This controls whether the music is paused or playing througout the app
@@ -24,6 +26,30 @@ public class SettingsScreen
 
     private ToggleButton mute;
     private Button       resetScores;
+    private TextView     SettingsTitle;
+    private TextView     music;
+    private TextView     ResetScores;
+
+
+
+
+
+    /**
+     * State of screen
+     */
+    public void initialize()
+    {
+        BackgroundPaper back =
+            new BackgroundPaper(0, 0, getWidth(), getHeight());
+        back.setSensor(true);
+        add(back);
+
+        Typeface typeFace =
+            Typeface.createFromAsset(getAssets(), "fonts/roughage.ttf");
+        SettingsTitle.setTypeface(typeFace);
+        music.setTypeface(typeFace);
+        ResetScores.setTypeface(typeFace);
+    }
 
 
     /**
@@ -88,6 +114,9 @@ public class SettingsScreen
     }
 
 
+    /**
+     * State of screen on resume
+     */
     @Override
     protected void onResume()
     {

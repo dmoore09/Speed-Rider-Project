@@ -1,5 +1,7 @@
 package cs2114.speedrider1;
 
+import android.graphics.Typeface;
+import android.widget.TextView;
 import android.media.MediaPlayer;
 import sofia.app.ShapeScreen;
 
@@ -20,6 +22,10 @@ public class StartScreen
      */
     static MediaPlayer player;
     private Rider      rider1;
+    private TextView   title;
+    private TextView   start;
+    private TextView   settings;
+    private TextView   help;
 
 
     /**
@@ -27,6 +33,13 @@ public class StartScreen
      */
     public void initialize()
     {
+        Typeface typeFace =
+            Typeface.createFromAsset(getAssets(), "fonts/roughage.ttf");
+        title.setTypeface(typeFace);
+        start.setTypeface(typeFace);
+        help.setTypeface(typeFace);
+        settings.setTypeface(typeFace);
+
         player = MediaPlayer.create(this, R.raw.intro);
         player.start();
         player.setLooping(true);
@@ -61,6 +74,9 @@ public class StartScreen
     }
 
 
+    /**
+     * State of screen after initialization
+     */
     public void afterInitialize()
     {
         rider1.finishRider();

@@ -20,18 +20,23 @@ public class Rider
     extends RectangleShape
 {
 
-    //boolean to see if the rider is removed
-    private boolean isRemoved;
+    // boolean to see if the rider is removed
+    private boolean  isRemoved;
 
     // ------------------------------------------------------------------------
+    /**
+     * Wheel 1
+     */
     static OvalShape wheel1;
+    /**
+     * Wheel 2
+     */
     static OvalShape wheel2;
 
 
-
     /**
-     * creates a new rider. Rectangle shape represents the body. oval shapes
-     * for wheels, and more rectangles for arms all are jointed together
+     * creates a new rider. Rectangle shape represents the body. oval shapes for
+     * wheels, and more rectangles for arms all are jointed together
      *
      * @param x
      *            position of center the rider
@@ -41,7 +46,7 @@ public class Rider
     public Rider(float x, float y)
     {
 
-        //main body where force is applied
+        // main body where force is applied
         super(x - 10, y - 8, x + 12, y + 9);
 
         isRemoved = false;
@@ -56,9 +61,7 @@ public class Rider
 
         this.setImage("bike");
 
-
-
-        //oval shapes for wheels
+        // oval shapes for wheels
         wheel1 = new OvalShape(x + 8, y + 9, 6.5f);
         wheel2 = new OvalShape(x - 8, y + 9, 6.5f);
 
@@ -81,9 +84,8 @@ public class Rider
         wheel1.setGravityScale(0);
         wheel2.setGravityScale(0);
 
-
-
     }
+
 
     /**
      * finish rider and create joints
@@ -91,48 +93,47 @@ public class Rider
     public void finishRider()
     {
 
-
         this.getShapeField().add(wheel1);
         this.getShapeField().add(wheel2);
 
-        //connect to each other
-        DistanceJoint wheelJoint = new DistanceJoint(wheel1, wheel2,
-            Anchor.CENTER, Anchor.CENTER);
+        // connect to each other
+        DistanceJoint wheelJoint =
+            new DistanceJoint(wheel1, wheel2, Anchor.CENTER, Anchor.CENTER);
         wheelJoint.setCanShapesCollide(false);
         wheelJoint.connect();
 
-        //connect to body
-        DistanceJoint wBodyJ1 = new DistanceJoint(wheel1, this,
-            Anchor.CENTER, Anchor.CENTER);
-        DistanceJoint wBodyJ2 = new DistanceJoint(wheel2, this,
-            Anchor.CENTER, Anchor.CENTER);
+        // connect to body
+        DistanceJoint wBodyJ1 =
+            new DistanceJoint(wheel1, this, Anchor.CENTER, Anchor.CENTER);
+        DistanceJoint wBodyJ2 =
+            new DistanceJoint(wheel2, this, Anchor.CENTER, Anchor.CENTER);
         wBodyJ1.setCanShapesCollide(false);
         wBodyJ1.connect();
         wBodyJ2.setCanShapesCollide(false);
         wBodyJ2.connect();
 
-        DistanceJoint wBodyJ3 = new DistanceJoint(wheel1, this,
-            Anchor.CENTER, Anchor.BOTTOM_RIGHT);
-        DistanceJoint wBodyJ4 = new DistanceJoint(wheel2, this,
-            Anchor.CENTER, Anchor.BOTTOM_LEFT);
+        DistanceJoint wBodyJ3 =
+            new DistanceJoint(wheel1, this, Anchor.CENTER, Anchor.BOTTOM_RIGHT);
+        DistanceJoint wBodyJ4 =
+            new DistanceJoint(wheel2, this, Anchor.CENTER, Anchor.BOTTOM_LEFT);
         wBodyJ3.setCanShapesCollide(false);
         wBodyJ3.connect();
         wBodyJ4.setCanShapesCollide(false);
         wBodyJ4.connect();
 
-        DistanceJoint wBodyJ5 = new DistanceJoint(wheel1, this,
-            Anchor.CENTER, Anchor.BOTTOM_LEFT);
-        DistanceJoint wBodyJ6 = new DistanceJoint(wheel2, this,
-            Anchor.CENTER, Anchor.BOTTOM_RIGHT);
+        DistanceJoint wBodyJ5 =
+            new DistanceJoint(wheel1, this, Anchor.CENTER, Anchor.BOTTOM_LEFT);
+        DistanceJoint wBodyJ6 =
+            new DistanceJoint(wheel2, this, Anchor.CENTER, Anchor.BOTTOM_RIGHT);
         wBodyJ5.setCanShapesCollide(false);
         wBodyJ5.connect();
         wBodyJ6.setCanShapesCollide(false);
         wBodyJ6.connect();
 
-        DistanceJoint wBodyJ7 = new DistanceJoint(wheel1, this,
-            Anchor.CENTER, Anchor.TOP);
-        DistanceJoint wBodyJ8 = new DistanceJoint(wheel2, this,
-            Anchor.CENTER, Anchor.TOP);
+        DistanceJoint wBodyJ7 =
+            new DistanceJoint(wheel1, this, Anchor.CENTER, Anchor.TOP);
+        DistanceJoint wBodyJ8 =
+            new DistanceJoint(wheel2, this, Anchor.CENTER, Anchor.TOP);
         wBodyJ7.setCanShapesCollide(false);
         wBodyJ7.connect();
         wBodyJ8.setCanShapesCollide(false);
@@ -144,7 +145,7 @@ public class Rider
         wheel1.setImage("wheel");
         wheel2.setImage("wheel");
 
-        //animate wheels
+        // animate wheels
         wheel1.animate(200).repeat().rotation(360);
         wheel2.animate(200).repeat().rotation(360);
 
@@ -167,8 +168,10 @@ public class Rider
         wheel2.remove();
     }
 
+
     /**
      * return value of is removed
+     *
      * @return true if removed, false if not
      */
     public boolean getRemoved()
@@ -176,8 +179,10 @@ public class Rider
         return isRemoved;
     }
 
+
     /**
      * returns all component shapes that make up the rider
+     *
      * @return list of shapes
      */
     public OvalShape getWheel1()
@@ -186,8 +191,10 @@ public class Rider
         return wheel1;
     }
 
+
     /**
      * returns all component shapes that make up the rider
+     *
      * @return list of shapes
      */
     public OvalShape getWheel2()

@@ -7,7 +7,9 @@ import sofia.graphics.OvalShape;
  * // -------------------------------------------------------------------------
  * /** the goal that a player must reach in order to finish any given level
  *
- * @author dmoore09
+ * @author Daniel Moore
+ * @author Chris Conley
+ * @author Harjas Singh
  * @version Mar 11, 2013
  */
 public class Goal
@@ -42,7 +44,6 @@ public class Goal
     public void onCollisionWith(OvalShape oval)
     {
         oval.remove();
-
 
     }
 }

@@ -1,14 +1,15 @@
 package cs2114.speedrider1;
+
 import android.graphics.PointF;
 import student.AndroidTestCase;
 import sofia.graphics.ShapeView;
+
 /**
  * // -------------------------------------------------------------------------
-/**
- *  test spinner colisions
+ * /** test spinner colisions
  *
- *  @author Daniel
- *  @version May 5, 2013
+ * @author Daniel
+ * @version May 5, 2013
  */
 public class SpinnerTest
     extends AndroidTestCase<LevelOneScreen>
@@ -39,15 +40,16 @@ public class SpinnerTest
 
         shapeView.add(spin);
 
-        Rider rider = shapeView.getShapes().locatedAt(10, 10).
-            withClass(Rider.class).front();
-
+        Rider rider =
+            shapeView.getShapes().locatedAt(10, 10).withClass(Rider.class)
+                .front();
 
         PointF vel = rider.getLinearVelocity();
 
-        //tell it to run longer?
+        // tell it to run longer?
         assertTrue(vel.x != 0);
     }
+
 
     /**
      * test the collision for a rider and a spinner from the right
@@ -61,9 +63,9 @@ public class SpinnerTest
 
         shapeView.add(spin);
 
-
-        Rider rider = shapeView.getShapes().locatedAt(10, 10).
-            withClass(Rider.class).front();
+        Rider rider =
+            shapeView.getShapes().locatedAt(10, 10).withClass(Rider.class)
+                .front();
         rider.moveBy(20, 5);
         PointF vel = rider.getLinearVelocity();
 

@@ -4,10 +4,12 @@ import sofia.graphics.RectangleShape;
 
 // -------------------------------------------------------------------------
 /**
- *  background looks like lined paper
+ * background looks like lined paper
  *
- *  @author Daniel
- *  @version Apr 29, 2013
+ * @author Daniel Moore
+ * @author Chris Conley
+ * @author Harjas Singh
+ * @version Apr 29, 2013
  */
 public class BackgroundPaper
     extends RectangleShape
@@ -16,10 +18,15 @@ public class BackgroundPaper
     // ----------------------------------------------------------
     /**
      * Create a new BackgroundPaper object.
-     * @param left corner
-     * @param top corner
-     * @param right corner
-     * @param bottom corner
+     *
+     * @param left
+     *            corner
+     * @param top
+     *            corner
+     * @param right
+     *            corner
+     * @param bottom
+     *            corner
      */
     public BackgroundPaper(float left, float top, float right, float bottom)
     {

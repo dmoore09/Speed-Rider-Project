@@ -20,30 +20,31 @@ public final class R {
         public static final int wheel=0x7f020006;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f08000d;
-        public static final int booster=0x7f080013;
-        public static final int draw=0x7f080012;
+        public static final int LevelSelectTitle=0x7f080004;
+        public static final int RelativeLayout1=0x7f08000e;
+        public static final int ResetScores=0x7f08000d;
+        public static final int SettingsTitle=0x7f080009;
+        public static final int booster=0x7f080014;
+        public static final int draw=0x7f080013;
         public static final int elapsedTimeLvl1=0x7f080002;
         public static final int elapsedTimeLvl2=0x7f080008;
         public static final int elapsedTimeLvl3=0x7f080007;
-        public static final int elaspedTimeLvl1=0x7f080001;
-        public static final int erase=0x7f080014;
-        public static final int help=0x7f08000f;
+        public static final int erase=0x7f080015;
+        public static final int help=0x7f080010;
+        public static final int help1=0x7f080001;
         public static final int level1=0x7f080003;
-        public static final int level2=0x7f080004;
-        public static final int level3=0x7f080005;
-        public static final int level4=0x7f080006;
-        public static final int menu_settings=0x7f080017;
+        public static final int level2=0x7f080005;
+        public static final int level3=0x7f080006;
+        public static final int menu_settings=0x7f080018;
+        public static final int music=0x7f08000b;
         public static final int mute=0x7f08000a;
-        public static final int resetScores=0x7f08000b;
-        public static final int scores=0x7f080016;
-        public static final int settings=0x7f080011;
+        public static final int resetScores=0x7f08000c;
+        public static final int scores=0x7f080017;
+        public static final int settings=0x7f080012;
         public static final int shapeView=0x7f080000;
-        public static final int start=0x7f080010;
-        public static final int textView2=0x7f08000c;
-        public static final int textView3=0x7f080009;
-        public static final int title=0x7f08000e;
-        public static final int undo=0x7f080015;
+        public static final int start=0x7f080011;
+        public static final int title=0x7f08000f;
+        public static final int undo=0x7f080016;
     }
     public static final class layout {
         public static final int helpscreen=0x7f030000;

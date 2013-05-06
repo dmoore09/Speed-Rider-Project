@@ -4,23 +4,28 @@ import android.graphics.PointF;
 import sofia.graphics.ShapeMotion;
 import sofia.graphics.Color;
 import sofia.graphics.RectangleShape;
+
 /**
  * // -------------------------------------------------------------------------
-/**
- *  obstacle that spins around perpetually
+ * /** obstacle that spins around perpetually
  *
- *  @author Daniel
- *  @version Apr 29, 2013
+ * @author Daniel
+ * @version Apr 29, 2013
  */
 public class Spinner
     extends RectangleShape
 {
     /**
      * Create a new spinner object.
-     * @param left corner of rectangle
-     * @param top corner of rectangle
-     * @param right corner of rectangle
-     * @param bottom corner of rectangle
+     *
+     * @param left
+     *            corner of rectangle
+     * @param top
+     *            corner of rectangle
+     * @param right
+     *            corner of rectangle
+     * @param bottom
+     *            corner of rectangle
      */
     public Spinner(float left, float top, float right, float bottom)
     {
@@ -33,11 +38,14 @@ public class Spinner
         this.animate(500).repeat().rotation(360).play();
     }
 
+
     // ----------------------------------------------------------
     /**
-     * when a rider collides it will push him back or forward depending
-     * on position
-     * @param rider in the game
+     * when a rider collides it will push him back or forward depending on
+     * position
+     *
+     * @param rider
+     *            in the game
      */
     public void onCollisionWith(Rider rider)
     {
@@ -53,7 +61,5 @@ public class Spinner
             rider.applyLinearImpulse(velocity.x + 10000, -(velocity.y + 10000));
         }
     }
-
-
 
 }

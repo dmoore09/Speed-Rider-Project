@@ -1,7 +1,9 @@
 package cs2114.speedrider1;
 
+import sofia.app.ShapeScreen;
+import android.graphics.Typeface;
+import android.widget.TextView;
 import sofia.app.Persistent;
-import sofia.app.Screen;
 
 /**
  * // -------------------------------------------------------------------------
@@ -11,17 +13,43 @@ import sofia.app.Screen;
  * @version Apr 4, 2013
  */
 public class LevelSelectScreen
-    extends Screen
+    extends ShapeScreen
 {
 
     @Persistent
-    private boolean lvl2 = false;
+    private boolean  lvl2 = false;
 
     @Persistent
-    private boolean lvl3 = false;
+    private boolean  lvl3 = false;
 
     @Persistent
-    private boolean lvl4 = false;
+    private boolean  lvl4 = false;
+
+    private TextView level1;
+
+    private TextView level2;
+    private TextView level3;
+    private TextView LevelSelectTitle;
+
+
+    /**
+     * Initializes the state of the Level select screen
+     */
+    public void initialize()
+    {
+        BackgroundPaper back =
+            new BackgroundPaper(0, 0, getWidth(), getHeight());
+        back.setSensor(true);
+        add(back);
+
+        Typeface typeFace =
+            Typeface.createFromAsset(getAssets(), "fonts/roughage.ttf");
+        level1.setTypeface(typeFace);
+        level2.setTypeface(typeFace);
+        level3.setTypeface(typeFace);
+        LevelSelectTitle.setTypeface(typeFace);
+
+    }
 
 
     /**

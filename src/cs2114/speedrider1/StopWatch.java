@@ -1,5 +1,11 @@
 package cs2114.speedrider1;
 
+/**
+ * Models a stopwatch for the game
+ *
+ * @author Chris
+ * @version May 5, 2013
+ */
 public class StopWatch
 {
     private long    startTime = 0;
@@ -7,6 +13,10 @@ public class StopWatch
     private boolean running   = false;
 
 
+    // ----------------------------------------------------------
+    /**
+     * Starts the stop watch
+     */
     public void start()
     {
         this.startTime = System.currentTimeMillis();
@@ -14,6 +24,9 @@ public class StopWatch
     }
 
 
+    /**
+     * Stops the stop watch
+     */
     public void stop()
     {
         this.stopTime = System.currentTimeMillis();
@@ -21,7 +34,11 @@ public class StopWatch
     }
 
 
-    // elaspsed time in milliseconds
+    /**
+     * elaspsed time in milliseconds
+     *
+     * @return long the time
+     */
     public long getElapsedTime()
     {
         long elapsed;
@@ -37,7 +54,11 @@ public class StopWatch
     }
 
 
-    // elaspsed time in seconds
+    /**
+     * elaspsed time in seconds
+     *
+     * @return long the time
+     */
     public long getElapsedTimeSecs()
     {
         long elapsed;
