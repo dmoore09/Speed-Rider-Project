@@ -35,7 +35,9 @@ public class Spinner
         this.setGravityScale(0);
         this.setDensity(10);
         setShapeMotion(ShapeMotion.DYNAMIC);
+        this.setImage("spinner");
         this.animate(500).repeat().rotation(360).play();
+
     }
 
 
