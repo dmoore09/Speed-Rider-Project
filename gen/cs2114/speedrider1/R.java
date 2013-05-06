@@ -45,9 +45,10 @@ public final class R {
     public static final class layout {
         public static final int levelonescreen=0x7f030000;
         public static final int levelselectscreen=0x7f030001;
-        public static final int leveltwoscreen=0x7f030002;
-        public static final int settingsscreen=0x7f030003;
-        public static final int startscreen=0x7f030004;
+        public static final int levelthreescreen=0x7f030002;
+        public static final int leveltwoscreen=0x7f030003;
+        public static final int settingsscreen=0x7f030004;
+        public static final int startscreen=0x7f030005;
     }
     public static final class menu {
         public static final int options_menu=0x7f070000;
