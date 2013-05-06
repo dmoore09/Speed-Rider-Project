@@ -154,9 +154,23 @@ public class LevelOneScreen
      */
     public void onTouchDown(float newx1, float newy1)
     {
+        if (rider.getRemoved())
+        {
+            this.updateTime();
+            boolean x = true;
+            this.finish(x);
+        }
+        // make sure a rider was found to start
+        if (!started)
+        {
+            this.start();
+            timer.start();
+        }
         x1 = newx1;
         y1 = newy1;
-        super.onTouchDown(newx1, newy1, booster, started, rider, undo1, y1, x1, timer);
+        super.onTouchDown(newx1, newy1, booster, started, rider, undo1,
+            y1, x1, timer);
+
     }
 
 
@@ -239,9 +253,12 @@ public class LevelOneScreen
      */
     public void start()
     {
-        super.start(started, rider);
-        started = true;
-
+            // apply a force to get the rider moving
+            rider.setGravityScale(1);
+            Rider.wheel1.setGravityScale(1f);
+            Rider.wheel2.setGravityScale(1f);
+            rider.applyLinearImpulse(0, 20000);
+            started = true;
     }
 
 
@@ -309,7 +326,6 @@ public class LevelOneScreen
      * Reads and writes to the listOfScores file used in superclass method
      * process touch
      */
-    @SuppressWarnings("unused")
     private void updateTime()
     {
         // Stops the StopWatch and stores its data in a byte array

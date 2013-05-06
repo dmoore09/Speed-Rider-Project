@@ -39,28 +39,10 @@ public class SpeedBooster
         //get the linear velocity of the rider
         PointF velocity = player.getLinearVelocity();
 
-//      if (velocity.x >= 0 && velocity.y >= 0)
-//      {
-//          player.setLinearVelocity(velocity.x + 50f, velocity.y + 50f);
-//      }
-//      else if (velocity.x < 0 && velocity.y >= 0)
-//      {
-//          player.setLinearVelocity(velocity.x - 50f, velocity.y + 50f);
-//      }
-//      else if (velocity.x >= 0 && velocity.y < 0)
-//      {
-//          player.setLinearVelocity(velocity.x + 50f, velocity.y - 50f);
-//      }
-//      else if (velocity.x < 0 && velocity.y < 0)
-//      {
-//          player.setLinearVelocity(velocity.x - 50f, velocity.y - 50f);
-//      }
-
-
         //apply a linear impulse in the same direction as the player's linear
         //velocity
         player.
-        setLinearVelocity(velocity.x * 2000, velocity.y * 2000);
+        setLinearVelocity(velocity.x * 30, velocity.y * 30);
 
         this.remove();
     }

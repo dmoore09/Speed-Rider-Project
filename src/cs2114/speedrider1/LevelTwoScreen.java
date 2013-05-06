@@ -95,6 +95,9 @@ public class LevelTwoScreen
         booster = false;
         started = false;
 
+        undo1 = new Stack<Shape>();
+        timer = new StopWatch();
+
         BackgroundPaper back =
             new BackgroundPaper(0, 0, getWidth(), getHeight());
         back.setSensor(true);
@@ -116,14 +119,58 @@ public class LevelTwoScreen
         this.add(bound4);
 
         // create a goal for the level
-        goal = new Goal(this.getWidth() - 40, 50, 30);
+        goal = new Goal(this.getWidth() - 30, this.getHeight()/2 + 150, 15);
         this.add(goal);
+
+        //add spinners
+        Spinner spinner = new Spinner(this.getWidth()/2, this.getHeight()/2,
+            this.getWidth()/2 + 10, this.getHeight()/2 + 25);
+        this.add(spinner);
+        spinner.animate(500).repeat().rotation(360).play();
+
+        //add spinners
+        Spinner spinner2 = new Spinner(this.getWidth()/2 - 150,
+            this.getHeight()/2 - 150, this.getWidth()/2 - 140,
+            this.getHeight()/2 - 125);
+        this.add(spinner2);
+        spinner2.animate(500).repeat().rotation(360).play();
+
+        //add spinners
+        Spinner spinner3 = new Spinner(this.getWidth()/2 + 150,
+            this.getHeight()/2 + 150, this.getWidth()/2 + 140,
+            this.getHeight()/2 + 125);
+        this.add(spinner3);
+        spinner3.animate(500).repeat().rotation(360).play();
+
+        //add spinners
+        Spinner spinner4 = new Spinner(this.getWidth()/2 + 250,
+            this.getHeight()/2 + 50, this.getWidth()/2 + 240,
+            this.getHeight()/2 + 75);
+        this.add(spinner4);
+        spinner4.animate(500).repeat().rotation(360).play();
+
+        //add spinners
+        Spinner spinner5 = new Spinner(this.getWidth()/2 + 150,
+            this.getHeight()/2 - 100, this.getWidth()/2 + 140,
+            this.getHeight()/2 - 125);
+        this.add(spinner5);
+        spinner5.animate(500).repeat().rotation(360).play();
+
+        //add spinners
+        Spinner spinner6 = new Spinner(this.getWidth()/2 - 75,
+            this.getHeight()/2 + 125, this.getWidth()/2 - 85,
+            this.getHeight()/2 + 100);
+        this.add(spinner6);
+        spinner6.animate(500).repeat().rotation(360).play();
+
+
+
 
         // set the gravity level for the course
         this.setGravity(0, 20f);
 
         // create a new rider
-        rider = new Rider(20, this.getHeight() - 50);
+        rider = new Rider(20, 20);
         this.add(rider);
         rider.setGravityScale(0);
     }
@@ -148,6 +195,18 @@ public class LevelTwoScreen
      */
     public void onTouchDown(float newx1, float newy1)
     {
+        if (rider.getRemoved())
+        {
+            this.updateTime();
+            boolean x = true;
+            this.finish(x);
+        }
+        // make sure a rider was found to start
+        if (!started)
+        {
+            this.start();
+            timer.start();
+        }
         x1 = newx1;
         y1 = newy1;
         super.onTouchDown(newx1, newy1, booster, started, rider, undo1, y1, x1, timer);
@@ -234,13 +293,12 @@ public class LevelTwoScreen
      */
     public void start()
     {
-        while (!started)
-        {
-            // apply a force to get the rider moving
-            rider.setGravityScale(1);
-            rider.applyLinearImpulse(30000, 20000);
-            started = true;
-        }
+     // apply a force to get the rider moving
+        rider.setGravityScale(1);
+        Rider.wheel1.setGravityScale(1f);
+        Rider.wheel2.setGravityScale(1f);
+        rider.applyLinearImpulse(0, 20000);
+        started = true;
     }
 
     private String readFile()
@@ -298,7 +356,6 @@ public class LevelTwoScreen
      * Reads and writes to the listOfScores file called by superclass method
      * process touch
      */
-    @SuppressWarnings("unused")
     private void updateTime()
     {
         // Stops the StopWatch and stores its data in a byte array

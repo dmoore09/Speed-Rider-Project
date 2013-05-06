@@ -57,12 +57,12 @@ public class Level
             undo1.push(boost);
         }
 
-        // make sure a rider was found to start
-        if (!started)
-        {
-            this.start(started, rider);
-            timer.start();
-        }
+//        // make sure a rider was found to start
+//        if (!started)
+//        {
+//            this.start(started, rider);
+//            timer.start();
+//        }
 
         if (rider.getRemoved())
         {
@@ -94,8 +94,6 @@ public class Level
         Stack<Shape> undo1)
     {
         this.processTouch(x1, y1, newX, newY, draw, erase, undo1);
-//        x1 = newX;
-//        y1 = newY;
     }
 
 
@@ -163,23 +161,20 @@ public class Level
         }
     }
 
-    /**
-     * This lets the player control when the animation starts
-     *
-     * @param started
-     * @param rider
-     */
-    public void start(boolean started, Rider rider)
-    {
-        if (!started)
-        {
-            // apply a force to get the rider moving
-            rider.setGravityScale(1);
-            Rider.wheel1.setGravityScale(1f);
-            Rider.wheel2.setGravityScale(1f);
-            rider.applyLinearImpulse(0, 20000);
-        }
-    }
+//    /**
+//     * This lets the player control when the animation starts
+//     *
+//     * @param started
+//     * @param rider
+//     */
+//    public void start(boolean started, Rider rider)
+//    {
+//            // apply a force to get the rider moving
+//            rider.setGravityScale(1);
+//            Rider.wheel1.setGravityScale(1f);
+//            Rider.wheel2.setGravityScale(1f);
+//            rider.applyLinearImpulse(0, 20000);
+//    }
 
 
     /**
