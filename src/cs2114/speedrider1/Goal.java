@@ -1,6 +1,5 @@
 package cs2114.speedrider1;
 
-import sofia.graphics.Color;
 import sofia.graphics.OvalShape;
 
 /**
@@ -29,9 +28,8 @@ public class Goal
     public Goal(float x, float y, float radius)
     {
         super(x, y, radius);
-        this.setFilled(true);
-        this.setColor(Color.green);
         this.setZIndex(10);
+        setImage("goal");
     }
 
 

@@ -54,19 +54,27 @@ public class StartScreen
         Ground bound1 = new Ground(0, 0, this.getWidth(), 0);
         this.add(bound1);
 
+        bound1.setRestitution(3);
+
         Ground bound2 = new Ground(0, 0, 0, this.getHeight());
         this.add(bound2);
+
+        bound2.setRestitution(3);
 
         Ground bound3 =
             new Ground(0, this.getHeight(), this.getWidth(), this.getHeight());
         this.add(bound3);
 
+        bound3.setRestitution(3);
+
         Ground bound4 =
             new Ground(this.getWidth(), 0, this.getWidth(), this.getHeight());
         this.add(bound4);
 
+        bound4.setRestitution(3);
+
         rider1 = new Rider(50f, 50f);
-        rider1.setLinearVelocity(100f, 200f);
+
         rider1.setGravityScale(0);
         rider1.setRestitution(1.0f);
         this.add(rider1);
@@ -83,6 +91,7 @@ public class StartScreen
         rider1.setGravityScale(1);
         Rider.wheel1.setGravityScale(1f);
         Rider.wheel2.setGravityScale(1f);
+        rider1.setLinearVelocity(50f, 100f);
     }
 
 
@@ -92,6 +101,7 @@ public class StartScreen
     public void startClicked()
     {
         this.presentScreen(LevelSelectScreen.class);
+        this.finish();
     }
 
 
