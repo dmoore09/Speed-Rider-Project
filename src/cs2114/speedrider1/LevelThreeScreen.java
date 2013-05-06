@@ -143,11 +143,43 @@ public class LevelThreeScreen
         Spinner spinner3 =
             new Spinner(
                 this.getWidth() / 2,
-                this.getHeight() / 2 + 150,
-                this.getWidth() / 2,
-                this.getHeight() / 2 + 100);
+                this.getHeight() / 2 + 200,
+                this.getWidth() / 2 + 10,
+                this.getHeight() / 2 + 150);
         this.add(spinner3);
         spinner3.animate(500).repeat().rotation(360).play();
+
+        // add spinners
+        Spinner spinner4 =
+            new Spinner(
+                this.getWidth() / 2 + 200,
+                this.getHeight() / 2 + 50,
+                this.getWidth() / 2 + 190,
+                this.getHeight() / 2 + 150);
+        this.add(spinner4);
+        spinner4.animate(500).repeat().rotation(360).play();
+
+        // add spinners
+        Spinner spinner5 =
+            new Spinner(
+                this.getWidth() / 2 + 200,
+                this.getHeight() / 2 - 50,
+                this.getWidth() / 2 + 190,
+                this.getHeight() / 2 - 150);
+        this.add(spinner5);
+        spinner5.animate(500).repeat().rotation(360).play();
+
+        //add shooters
+        Shooter shoot1 = new Shooter(this.getWidth()/2 - 100,
+            this.getHeight() / 2 - 150, this.getWidth()/2 - 85,
+            this.getHeight() / 2 - 135, true);
+        add(shoot1);
+
+      //add shooters
+        Shooter shoot2 = new Shooter(this.getWidth() - 15,
+            this.getHeight() / 2 - 100, this.getWidth() - 30,
+            this.getHeight() / 2 - 85, true);
+        add(shoot2);
 
         // set the gravity level for the course
         this.setGravity(0, 20f);
