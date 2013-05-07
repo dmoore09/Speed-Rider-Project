@@ -2,7 +2,6 @@ package cs2114.speedrider1;
 
 import android.graphics.PointF;
 import sofia.graphics.ShapeMotion;
-import sofia.graphics.Color;
 import sofia.graphics.RectangleShape;
 
 /**
