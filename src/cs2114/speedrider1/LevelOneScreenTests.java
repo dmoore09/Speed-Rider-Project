@@ -17,6 +17,7 @@ public class LevelOneScreenTests
 {
     // References to the widgets in layout
     private ShapeView shapeView;
+    private Button    undo;
     private Button    drawing;
     private Button    erasing;
     private Button    speedBooster;
@@ -124,6 +125,7 @@ public class LevelOneScreenTests
         touchUp();
 
         // same here click the undo button 3 times, should cover all cases
+        click(undo);
 
         assertNull(shapeView.getShapes().intersecting(200, 150, 200, 50)
             .withClass(LineShape.class).front());

@@ -5,7 +5,8 @@ int drawable goal 0x7f020003
 int drawable ic_launcher 0x7f020004
 int drawable paper 0x7f020005
 int drawable spikeballg 0x7f020006
-int drawable wheel 0x7f020007
+int drawable spinner 0x7f020007
+int drawable wheel 0x7f020008
 int id LevelSelectTitle 0x7f080004
 int id RelativeLayout1 0x7f080010
 int id ResetScores 0x7f08000f

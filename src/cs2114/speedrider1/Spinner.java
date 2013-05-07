@@ -2,7 +2,6 @@ package cs2114.speedrider1;
 
 import android.graphics.PointF;
 import sofia.graphics.ShapeMotion;
-import sofia.graphics.Color;
 import sofia.graphics.RectangleShape;
 
 /**
@@ -30,12 +29,12 @@ public class Spinner
     public Spinner(float left, float top, float right, float bottom)
     {
         super(left, top, right, bottom);
-        setFillColor(Color.green);
-        setFilled(true);
         this.setGravityScale(0);
         this.setDensity(10);
         setShapeMotion(ShapeMotion.DYNAMIC);
+        this.setImage("spinner");
         this.animate(500).repeat().rotation(360).play();
+
     }
 
 
