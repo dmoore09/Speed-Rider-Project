@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true" >
-    
+
     <sofia.graphics.ShapeView
         android:id="@+id/shapeView"
         android:layout_width="match_parent"
@@ -51,5 +51,17 @@
         android:clickable="true"
         android:text="Level 3"
         android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/sandboxLvl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/level3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:clickable="true"
+        android:text="Sandbox"
+        android:textSize="26sp"
+        android:visibility="invisible" />
 
 </RelativeLayout>

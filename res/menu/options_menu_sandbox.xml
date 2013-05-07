@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/goal"
+        android:title="Goal"/>
+    <item
+        android:id="@+id/spinner"
+        android:title="Spinner"/>
+    <item
+        android:id="@+id/shooter"
+        android:title="Shooter"/>
+    <item
+        android:id="@+id/draw"
+        android:title="Draw"/>
+    <item
+        android:id="@+id/booster"
+        android:title="Booster"/>
+    <item
+        android:id="@+id/erase"
+        android:title="Erase"/>
+    <item
+        android:id="@+id/undo"
+        android:title="Undo"/>
+    <item
+        android:id="@+id/scores"
+        android:title="Scores">
+    </item>
+
+</menu>

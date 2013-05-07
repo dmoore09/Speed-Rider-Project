@@ -1,5 +1,6 @@
 package cs2114.speedrider1;
 
+import android.os.Bundle;
 import sofia.app.ShapeScreen;
 import android.graphics.Typeface;
 import android.widget.TextView;
@@ -17,18 +18,18 @@ public class LevelSelectScreen
 {
 
     @Persistent
-    private boolean  lvl2 = false;
+    private boolean  lvl2    = false;
 
     @Persistent
-    private boolean  lvl3 = false;
+    private boolean  lvl3    = false;
 
     @Persistent
-    private boolean  lvl4 = false;
+    private boolean  sandbox = false;
 
     private TextView level1;
-
     private TextView level2;
     private TextView level3;
+    private TextView sandboxLvl;
     private TextView LevelSelectTitle;
 
 
@@ -47,8 +48,13 @@ public class LevelSelectScreen
         level1.setTypeface(typeFace);
         level2.setTypeface(typeFace);
         level3.setTypeface(typeFace);
+        sandboxLvl.setTypeface(typeFace);
         LevelSelectTitle.setTypeface(typeFace);
 
+        if (sandbox)
+        {
+            sandboxLvl.setVisibility(0);
+        }
     }
 
 
@@ -100,11 +106,11 @@ public class LevelSelectScreen
     /**
      * starts level 4 if it is unlocked
      */
-    public void level4Clicked()
+    public void sandboxLvlClicked()
     {
-        if (lvl4 == true)
+        if (sandbox == true)
         {
-            this.presentScreen(LevelTwoScreen.class);
+            this.presentScreen(SandboxLevelScreen.class);
         }
     }
 
@@ -141,6 +147,17 @@ public class LevelSelectScreen
      */
     public void levelThreeScreenFinished(boolean finished)
     {
-        lvl4 = finished;
+        sandbox = finished;
+    }
+
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (sandbox)
+        {
+            sandboxLvl.setVisibility(0);
+        }
     }
 }
